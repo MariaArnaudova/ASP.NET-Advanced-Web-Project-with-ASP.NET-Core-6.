@@ -5,7 +5,7 @@ namespace ArtStroke.Web
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
-    using Data;
+    using ArtStroke.Data;
     public class Program
     {
         public static void Main(string[] args)

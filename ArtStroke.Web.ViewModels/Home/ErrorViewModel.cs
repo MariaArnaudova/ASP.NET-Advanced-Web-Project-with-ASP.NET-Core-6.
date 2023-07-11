@@ -1,4 +1,4 @@
-namespace ArtStroke.Web.Models
+namespace ArtStroke.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

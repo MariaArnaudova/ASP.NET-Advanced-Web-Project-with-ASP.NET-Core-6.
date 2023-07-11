@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace ArtStroke.Web.Data.Migrations
+namespace ArtStroke.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

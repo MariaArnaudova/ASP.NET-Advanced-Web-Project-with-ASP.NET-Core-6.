@@ -4,7 +4,8 @@ namespace ArtStroke.Web.Controllers
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
-    using Models;
+
+    using ArtStroke.Web.ViewModels.Home;
     public class HomeController : Controller
     {   
         public HomeController()
