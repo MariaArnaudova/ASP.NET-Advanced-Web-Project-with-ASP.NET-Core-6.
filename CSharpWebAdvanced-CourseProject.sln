@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1C858DE4-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Data", "ArtStroke.Data\ArtStroke.Data.csproj", "{F1274197-3239-4863-BE05-8D77AE6A5BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Art.Stroke.Data.Models", "Art.Stroke.Data.Models\Art.Stroke.Data.Models.csproj", "{F444D3C1-FDD9-4F87-A756-AF20DC763796}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Data.Models", "Art.Stroke.Data.Models\ArtStroke.Data.Models.csproj", "{F444D3C1-FDD9-4F87-A756-AF20DC763796}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Web.ViewModels", "ArtStroke.Web.ViewModels\ArtStroke.Web.ViewModels.csproj", "{F13FA693-260B-495E-846E-4C6E1EF4578E}"
 EndProject

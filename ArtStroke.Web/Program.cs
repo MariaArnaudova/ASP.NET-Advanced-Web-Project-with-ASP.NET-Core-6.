@@ -6,6 +6,8 @@ namespace ArtStroke.Web
     using Microsoft.EntityFrameworkCore;
 
     using ArtStroke.Data;
+    using ArtStroke.Data.Models;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -15,15 +17,16 @@ namespace ArtStroke.Web
             // Add services to the container.
             string connectionString = 
                 builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<ArtStrokeDbContext>(options =>
                 options.UseSqlServer(connectionString));
             //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ArtStrokeDbContext>();
+
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();
