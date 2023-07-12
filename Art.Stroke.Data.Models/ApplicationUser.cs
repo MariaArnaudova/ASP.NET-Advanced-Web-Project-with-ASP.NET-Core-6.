@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ArtStroke.Data.Models
 {
-    public class ApplicationUser: IdentityUser<Guid>
+    using Microsoft.AspNetCore.Identity;
+    public class ApplicationUser : IdentityUser<Guid>
     {
+        public ApplicationUser()
+        {
+            this.PrintDesigns = new HashSet<PrintDesign>();
+            this.NewTechiqueArts = new HashSet<NewTechiqueArt>();
+        }
+
+        public ICollection<PrintDesign> PrintDesigns { get; set; }
+
+        public ICollection<NewTechiqueArt> NewTechiqueArts { get; set; }
     }
 }

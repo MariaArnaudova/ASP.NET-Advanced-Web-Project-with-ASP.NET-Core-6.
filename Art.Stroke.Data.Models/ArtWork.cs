@@ -9,6 +9,7 @@ namespace ArtStroke.Data.Models
         public ArtWork()
         {
             this.Id = Guid.NewGuid();
+            this.PrintDesigns = new HashSet<PrintDesign>();
         }
 
         [Key]
@@ -42,6 +43,8 @@ namespace ArtStroke.Data.Models
 
         [ForeignKey("ArtistId")]
         public Artist Artist { get; set; } = null!;
+
+        public ICollection<PrintDesign> PrintDesigns { get; set; }
 
     }
 }

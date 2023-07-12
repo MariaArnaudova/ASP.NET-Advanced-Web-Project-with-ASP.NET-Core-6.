@@ -41,6 +41,27 @@ namespace ArtStroke.Common
 
             public const int ImageUrlMaxLengt = 2048;
         }
+
+        public static class Artist
+        {
+            public const int NameMinLength = 4;
+
+            public const int NameMaxLength = 30;
+
+            public const int BiographyMinLength = 30;
+            public const int BiographyMaxLength = 3000;
+        }
+
+        public static class NewTechiqueArt
+        {
+            public const int TitleMinLengt = 2;
+            public const int TitleMaxLengt = 30;
+
+            public const int DescriptionMinLength = 30;
+            public const int DescriptionMaxLength = 3000;
+
+            public const int ImageUrlMaxLengt = 2048;
+        }
     }
 
 }

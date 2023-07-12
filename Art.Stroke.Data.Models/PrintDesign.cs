@@ -22,7 +22,12 @@ namespace ArtStroke.Data.Models
         public string CreatorName { get; set; } = null!;
 
         [Required]
-        public string UserId { get; set; } = null!;
-        
+        public Guid? UserId { get; set; }
+        public virtual ApplicationUser User { get; set; } = null!;
+
+        public string ArtWorkId { get; set; } = null!;
+
+        public ArtWork? ArtWork { get; set; } = null!;
+
     }
 }

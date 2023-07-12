@@ -3,6 +3,7 @@
 namespace ArtStroke.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using static Common.EntityValidationConstants.Artist;
     public class Artist
     {
         public Artist()
@@ -15,8 +16,13 @@ namespace ArtStroke.Data.Models
         [Key]
         public Guid Id { get; set; }
 
+        [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
+
+        [Required]
+        [MaxLength(BiographyMaxLength)]
         public string Biography { get; set; } = null!;
 
         public Guid UserId { get; set; }

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Art.Stroke.Data.Models\ArtStroke.Data.Models.csproj" />
     <ProjectReference Include="..\ArtStroke.Common\ArtStroke.Common.csproj" />
     <ProjectReference Include="..\ArtStroke.Data\ArtStroke.Data.csproj" />
     <ProjectReference Include="..\ArtStroke.Web.ViewModels\ArtStroke.Web.ViewModels.csproj" />

@@ -12,5 +12,12 @@ namespace ArtStroke.Data
             : base(options)
         {
         }
+
+        public DbSet<Artist> Artists { get; set; } = null!;
+        public DbSet<ArtWork> ArtWorks { get; set; } = null!;
+        public DbSet<Style> Styles { get; set; } = null!;
+        public DbSet<ArtEvent> ArtEvents { get; set; } = null!;
+        public DbSet<PrintDesign> PrintDesigns { get; set; } = null!;
+        public DbSet<NewTechiqueArt> NewTechiqueArts { get; set; } = null!;
     }
 }
