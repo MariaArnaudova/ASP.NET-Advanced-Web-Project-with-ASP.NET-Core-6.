@@ -25,9 +25,9 @@ namespace ArtStroke.Data.Models
         public Guid? UserId { get; set; }
         public virtual ApplicationUser User { get; set; } = null!;
 
-        public string ArtWorkId { get; set; } = null!;
+        public Guid ArtWorkId { get; set; } 
 
-        public ArtWork? ArtWork { get; set; } = null!;
+        public ArtWork ArtWork { get; set; } = null!;
 
     }
 }

@@ -10,7 +10,7 @@ namespace ArtStroke.Data.Models
         {
             this.Id = Guid.NewGuid();
 
-            this.ArtWorks = new HashSet<ArtWork>();
+            this.CreatedWorks = new HashSet<ArtWork>();
         }
 
         [Key]
@@ -29,6 +29,6 @@ namespace ArtStroke.Data.Models
 
         public virtual ApplicationUser User { get; set; } = null!;
 
-        public ICollection<ArtWork> ArtWorks { get; set; }
+        public virtual ICollection<ArtWork> CreatedWorks { get; set; }
     }
 }

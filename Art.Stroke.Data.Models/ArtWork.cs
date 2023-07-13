@@ -21,7 +21,7 @@ namespace ArtStroke.Data.Models
 
         public int StyleId { get; set; }
 
-        [ForeignKey("Style")]
+        [ForeignKey("StyleId")]
         public virtual Style Style { get; set; } = null!;
 
         [Required]
