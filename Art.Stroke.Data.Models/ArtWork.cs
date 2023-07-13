@@ -19,6 +19,10 @@ namespace ArtStroke.Data.Models
         [MaxLength(TitleMaxLengt)]
         public string Title { get; set; } = null!;
 
+        [Required]
+        [MaxLength(TechniqueMaxLengt)]
+        public string Technique { get; set; } = null!;
+
         public int StyleId { get; set; }
 
         [ForeignKey("StyleId")]

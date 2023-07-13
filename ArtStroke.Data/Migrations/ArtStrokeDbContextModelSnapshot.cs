@@ -134,6 +134,11 @@ namespace ArtStroke.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -167,6 +172,11 @@ namespace ArtStroke.Data.Migrations
                     b.Property<int>("StyleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Technique")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -182,6 +192,56 @@ namespace ArtStroke.Data.Migrations
                     b.HasIndex("StyleId");
 
                     b.ToTable("ArtWorks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("31f49e3d-93fc-4844-af54-4654d0443ab5"),
+                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Height = 700,
+                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/blue-boat-maria-arnaudova.jpg",
+                            StyleId = 1,
+                            Technique = "Oil on canvas",
+                            Title = "Wooden Brige",
+                            Width = 1000
+                        },
+                        new
+                        {
+                            Id = new Guid("96668c84-47cb-4fcb-b6d5-d439d59aa81f"),
+                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Height = 180,
+                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/split-pomegranate-maria-arnaudova.jpg",
+                            StyleId = 2,
+                            Technique = "Acril on canvas",
+                            Title = "Single Boat",
+                            Width = 250
+                        },
+                        new
+                        {
+                            Id = new Guid("6c7b8c19-eb1e-4a15-aea4-4c02dc622578"),
+                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Height = 350,
+                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
+                            StyleId = 3,
+                            Technique = "Oil on canvas",
+                            Title = "Sunset over the sea",
+                            Width = 500
+                        },
+                        new
+                        {
+                            Id = new Guid("3bd417c9-7399-45f2-8e17-ff21ed7adb78"),
+                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Height = 250,
+                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/swirling-of-life-maria-arnaudova.jpg",
+                            StyleId = 4,
+                            Technique = "Aquarel",
+                            Title = "Swirling",
+                            Width = 180
+                        });
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.NewTechiqueArt", b =>
@@ -268,6 +328,28 @@ namespace ArtStroke.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Styles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Classic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Modern"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Expressionism"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Abstract"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>

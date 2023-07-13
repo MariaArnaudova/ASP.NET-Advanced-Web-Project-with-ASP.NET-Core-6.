@@ -6,6 +6,7 @@ namespace ArtStroke.Data.Models
     {
         public ApplicationUser()
         {
+            this.Id = Guid.NewGuid();   
             this.PrintDesigns = new HashSet<PrintDesign>();
             this.NewTechiqueArts = new HashSet<NewTechiqueArt>();
         }

@@ -8,6 +8,9 @@ namespace ArtStroke.Common
             public const int TitleMinLengt = 2;
             public const int TitleMaxLengt = 30;
 
+            public const int TechniqueMinLengt = 4;
+            public const int TechniqueMaxLengt = 30;           
+
             public const int MinWidth = 6;
             public const int MinHeight = 6;
 
@@ -50,6 +53,10 @@ namespace ArtStroke.Common
 
             public const int BiographyMinLength = 30;
             public const int BiographyMaxLength = 3000;
+
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 15;
+
         }
 
         public static class NewTechiqueArt
@@ -62,6 +69,7 @@ namespace ArtStroke.Common
 
             public const int ImageUrlMaxLengt = 2048;
         }
+
     }
 
 }
