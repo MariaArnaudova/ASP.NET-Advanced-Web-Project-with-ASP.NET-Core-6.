@@ -6,15 +6,22 @@ namespace ArtStroke.Web.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     using ArtStroke.Web.ViewModels.Home;
+    using ArtStroke.Services.Data.Interfaces;
+
     public class HomeController : Controller
-    {   
-        public HomeController()
+    {
+        private readonly IArtWorkService artWorkService;
+        public HomeController(IArtWorkService artWorkService)
         {
+            this.artWorkService = artWorkService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<IndexViewModel> viewModels =
+             await  this.artWorkService.LastThreeArtWorksAsync();
+
+            return View(viewModels);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

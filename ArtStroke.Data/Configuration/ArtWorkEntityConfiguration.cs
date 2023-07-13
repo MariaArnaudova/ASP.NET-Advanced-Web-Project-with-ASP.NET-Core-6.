@@ -39,7 +39,7 @@ namespace ArtStroke.Data.Configuration
             
             artWork = new ArtWork()
             {
-                Title = "Wooden Brige",
+                Title = "Single Boat",
                 Technique = "Oil on canvas",
                 StyleId = 1,
                 Width = 1000,
@@ -52,7 +52,7 @@ namespace ArtStroke.Data.Configuration
 
             artWork = new ArtWork()
             {
-                Title = "Single Boat",
+                Title = "Freshnest",
                 Technique = "Acril on canvas",
                 StyleId = 2,
                 Width = 250,
