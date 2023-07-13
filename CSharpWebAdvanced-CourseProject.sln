@@ -5,17 +5,21 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Web", "ArtStroke.Web\ArtStroke.Web.csproj", "{6153821D-E0E3-4464-A3E8-7E4DDAFD8DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Common", "ArtStroke.Common\ArtStroke.Common.csproj", "{8606143E-4E33-4350-A71E-445A64A433B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Common", "ArtStroke.Common\ArtStroke.Common.csproj", "{8606143E-4E33-4350-A71E-445A64A433B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AAB5B79D-04D2-4127-93F8-A4E3EA31F3CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1C858DE4-A6C3-49D1-8CBB-2D94F46B0C17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Data", "ArtStroke.Data\ArtStroke.Data.csproj", "{F1274197-3239-4863-BE05-8D77AE6A5BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Data", "ArtStroke.Data\ArtStroke.Data.csproj", "{F1274197-3239-4863-BE05-8D77AE6A5BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Data.Models", "Art.Stroke.Data.Models\ArtStroke.Data.Models.csproj", "{F444D3C1-FDD9-4F87-A756-AF20DC763796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Data.Models", "Art.Stroke.Data.Models\ArtStroke.Data.Models.csproj", "{F444D3C1-FDD9-4F87-A756-AF20DC763796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Web.ViewModels", "ArtStroke.Web.ViewModels\ArtStroke.Web.ViewModels.csproj", "{F13FA693-260B-495E-846E-4C6E1EF4578E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Web.ViewModels", "ArtStroke.Web.ViewModels\ArtStroke.Web.ViewModels.csproj", "{F13FA693-260B-495E-846E-4C6E1EF4578E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47CDFC2A-190C-4BF2-AB9F-5DD79B86210E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Services.Data", "ArtWork.Services.Data\ArtStroke.Services.Data.csproj", "{9D161255-3127-4F1D-949D-FAD5CFF2F165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{F13FA693-260B-495E-846E-4C6E1EF4578E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F13FA693-260B-495E-846E-4C6E1EF4578E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F13FA693-260B-495E-846E-4C6E1EF4578E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D161255-3127-4F1D-949D-FAD5CFF2F165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D161255-3127-4F1D-949D-FAD5CFF2F165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D161255-3127-4F1D-949D-FAD5CFF2F165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D161255-3127-4F1D-949D-FAD5CFF2F165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +60,7 @@ Global
 		{F1274197-3239-4863-BE05-8D77AE6A5BC3} = {1C858DE4-A6C3-49D1-8CBB-2D94F46B0C17}
 		{F444D3C1-FDD9-4F87-A756-AF20DC763796} = {1C858DE4-A6C3-49D1-8CBB-2D94F46B0C17}
 		{F13FA693-260B-495E-846E-4C6E1EF4578E} = {AAB5B79D-04D2-4127-93F8-A4E3EA31F3CF}
+		{9D161255-3127-4F1D-949D-FAD5CFF2F165} = {47CDFC2A-190C-4BF2-AB9F-5DD79B86210E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {232AEDA8-C723-470C-9FB5-0AB8B7DF4595}

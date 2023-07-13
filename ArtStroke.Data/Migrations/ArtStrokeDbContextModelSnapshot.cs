@@ -158,6 +158,11 @@ namespace ArtStroke.Data.Migrations
                     b.Property<Guid>("ArtistId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 7, 13, 10, 15, 31, 743, DateTimeKind.Utc).AddTicks(1572));
+
                     b.Property<DateTime>("CreatingYear")
                         .HasColumnType("datetime2");
 
@@ -196,8 +201,9 @@ namespace ArtStroke.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("31f49e3d-93fc-4844-af54-4654d0443ab5"),
+                            Id = new Guid("a37309b4-4a19-4a5f-8347-706562ff6cdd"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 700,
                             ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/blue-boat-maria-arnaudova.jpg",
@@ -208,8 +214,9 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96668c84-47cb-4fcb-b6d5-d439d59aa81f"),
+                            Id = new Guid("25d59a82-249d-425c-b404-6e4bcc419944"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 180,
                             ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/split-pomegranate-maria-arnaudova.jpg",
@@ -220,8 +227,9 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c7b8c19-eb1e-4a15-aea4-4c02dc622578"),
+                            Id = new Guid("428a9d87-269e-4b07-82f9-6dd74b9063af"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 350,
                             ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
@@ -232,8 +240,9 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3bd417c9-7399-45f2-8e17-ff21ed7adb78"),
+                            Id = new Guid("af938ebb-d748-48a7-b6f4-8cbe11621190"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 250,
                             ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/swirling-of-life-maria-arnaudova.jpg",

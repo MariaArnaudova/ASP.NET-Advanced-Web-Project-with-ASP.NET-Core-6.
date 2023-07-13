@@ -40,6 +40,8 @@ namespace ArtStroke.Data.Models
         [MaxLength(ImageUrlMaxLengt)]
         public string ImageUrl { get; set; } = null!;
 
+        public DateTime CreatedOn { get; set; } 
+
         [Required]
         public DateTime CreatingYear { get; set; }
 

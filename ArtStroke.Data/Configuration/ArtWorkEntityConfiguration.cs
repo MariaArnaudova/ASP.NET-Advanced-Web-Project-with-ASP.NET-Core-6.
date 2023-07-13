@@ -12,6 +12,9 @@ namespace ArtStroke.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ArtWork> builder)
         {
+            builder.Property(aw => aw.CreatedOn)
+                .HasDefaultValue(DateTime.UtcNow);
+
             builder.HasOne(aw => aw.Artist)
                  .WithMany(a => a.CreatedWorks)
                  .HasForeignKey(aw => aw.ArtistId)
