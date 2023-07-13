@@ -7,6 +7,9 @@ namespace ArtStroke.Web
 
     using ArtStroke.Data;
     using ArtStroke.Data.Models;
+    using ArtStroke.Services.Data.Interfaces;
+    using ArtStroke.Services.Data;
+    using ArtStroke.Web.Infrastructure.Extentions;
 
     public class Program
     {
@@ -35,6 +38,8 @@ namespace ArtStroke.Web
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
                 .AddEntityFrameworkStores<ArtStrokeDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IArtWorkService));
 
             builder.Services.AddControllersWithViews();
 
