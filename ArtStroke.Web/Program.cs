@@ -15,7 +15,7 @@ namespace ArtStroke.Web
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            string connectionString = 
+            string connectionString =
                 builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ArtStrokeDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -23,7 +23,16 @@ namespace ArtStroke.Web
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount =
+                         builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+                options.Password.RequireLowercase =
+                         builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+                options.Password.RequireUppercase =
+                         builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+                options.Password.RequireNonAlphanumeric =
+                        builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+                options.Password.RequiredLength =
+                        builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
                 .AddEntityFrameworkStores<ArtStrokeDbContext>();
 
@@ -35,7 +44,7 @@ namespace ArtStroke.Web
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-                app.UseDeveloperExceptionPage();  
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -52,7 +61,7 @@ namespace ArtStroke.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapDefaultControllerRoute();    
+            app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
             app.Run();
