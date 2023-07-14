@@ -12,5 +12,11 @@ namespace ArtStroke.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+        }
     }
 }
