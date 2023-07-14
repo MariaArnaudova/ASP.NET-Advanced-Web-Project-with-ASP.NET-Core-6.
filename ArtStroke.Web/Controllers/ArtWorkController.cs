@@ -5,9 +5,10 @@ namespace ArtStroke.Web.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    public class Artist : Controller
+    public class ArtWorkController : Controller
     {
-        public async Task<IActionResult> Become()
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
         {
             return View();
         }

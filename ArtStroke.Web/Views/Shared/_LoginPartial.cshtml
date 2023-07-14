@@ -9,8 +9,8 @@
         <li class="nav-item">
             <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity?.Name!</a>
         </li>
-        <li class="nav-item">
-            <a  class="nav-link text-dark" asp-area="" asp-asp-controller="Artist" asp-action="Become">Become artist</a>
+        <li class="nav-item ">
+            <a  class="nav-link text-dark " asp-area="" asp-controller="Artist" asp-action="Become">Become artist</a>
         </li>
         <li class="nav-item">
             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
