@@ -1,0 +1,13 @@
+﻿@model ArtWorkFormModel
+@{
+    ViewBag.Title = "Add Artwork";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr/>
+
+<partial name="_ArtworkFormPartial" model="@Model"/>
+
+@section Scripts {
+    <partial name ="_ValidationScriptsPartial"/>
+}

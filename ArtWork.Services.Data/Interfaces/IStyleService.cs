@@ -5,6 +5,8 @@ namespace ArtStroke.Services.Data.Interfaces
 {
     public interface IStyleService
     {
-        Task<IEnumerable<ArtWorkStyleViewModel>> AllStylesAsync();  
+        Task<IEnumerable<ArtWorkStyleViewModel>> AllStylesAsync();
+
+        Task<bool> StyleExistByIdAsync(int id);
     }
 }

@@ -27,10 +27,12 @@ namespace ArtStroke.Web.ViewModels.ArtWork
 
         [Required]
         [Range(MinWidth, int.MaxValue)]
+        [Display(Name = "Width in Cm")]
         public int Width { get; set; }
 
         [Required]
         [Range(MinHeight, int.MaxValue)]
+        [Display(Name = "Height in Cm")]
         public int Height { get; set; }
 
         [Required]
@@ -39,8 +41,8 @@ namespace ArtStroke.Web.ViewModels.ArtWork
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        [Display(Name = "Date of creating")]
-        public DateTime CreatingYear { get; set; }
+        [Display(Name = "Year of creating")]
+        public int CreatingYear { get; set; }
 
         public int StyleId { get; set; }
 

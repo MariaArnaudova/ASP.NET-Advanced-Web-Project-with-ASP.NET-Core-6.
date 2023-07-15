@@ -40,6 +40,19 @@ namespace ArtStroke.Services.Data
 
         }
 
+        public async Task<string> GetArtistIdByUserIdAsync(string userId)
+        {
+            Artist? artist = await this.dbContext
+                .Artists
+                .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
+
+            if (artist == null)
+            {
+                return null;
+            }
+
+            return artist.Id.ToString();
+        }
 
         public async Task<bool> HasArtistByUserIdAsync(string userId)
         {
