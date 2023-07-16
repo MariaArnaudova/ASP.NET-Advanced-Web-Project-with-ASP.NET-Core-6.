@@ -13,6 +13,17 @@ namespace ArtStroke.Services.Data
         {
             this.dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<string>> AllStyleNameAsync()
+        {
+            IEnumerable<string> allStyleNames = await this.dbContext
+                .Styles
+                .Select(s => s.Name)
+                .ToArrayAsync();
+
+            return allStyleNames;
+        }
+
         public async Task<IEnumerable<ArtWorkStyleViewModel>> AllStylesAsync()
         {
             IEnumerable<ArtWorkStyleViewModel> allStyles = await this.dbContext

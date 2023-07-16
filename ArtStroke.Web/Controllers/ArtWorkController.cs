@@ -9,6 +9,7 @@ namespace ArtStroke.Web.Controllers
     using static Common.NotificationMessagesConstants;
     using ArtStroke.Data.Models;
     using System.Globalization;
+    using ArtStroke.Services.Data.Models.ArtWork;
 
     [Authorize]
     public class ArtWorkController : Controller
@@ -26,10 +27,18 @@ namespace ArtStroke.Web.Controllers
             this.artWorkService = artWorkService;
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllArtworksQueryModel queryModel)
         {
-            return this.Ok();
+            AllArtworksFilteredServiceModel serviceModel =
+                await this.artWorkService.AllAsync(queryModel);
+
+            queryModel.Artwoks = serviceModel.Artworks;
+            queryModel.TotalArtworks = serviceModel.CountTotalArtworks;
+            queryModel.Styles = await this.styleService.AllStyleNameAsync();
+
+            return this.View(queryModel);
         }
 
         [HttpGet]

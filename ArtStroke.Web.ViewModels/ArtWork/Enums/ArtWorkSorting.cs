@@ -5,9 +5,9 @@ namespace ArtStroke.Web.ViewModels.ArtWork.Enums
     {
         Newest = 0,
         Oldest = 1,
-        Techique = 2,
-        CreatingYearAscending = 3,
-        CreatingYearDescending = 4,
+        CreatingYearAscending = 2,
+        CreatingYearDescending = 3,
+        HasPrintedDesign = 4,   
 
     }
 }

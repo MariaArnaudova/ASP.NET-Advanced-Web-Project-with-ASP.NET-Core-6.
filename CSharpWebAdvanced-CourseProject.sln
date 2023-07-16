@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Web.ViewModels", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47CDFC2A-190C-4BF2-AB9F-5DD79B86210E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Services.Data", "ArtWork.Services.Data\ArtStroke.Services.Data.csproj", "{9D161255-3127-4F1D-949D-FAD5CFF2F165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Services.Data", "ArtWork.Services.Data\ArtStroke.Services.Data.csproj", "{9D161255-3127-4F1D-949D-FAD5CFF2F165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Web.Infrastructure", "ArtStroke.Web.Infrastructure\ArtStroke.Web.Infrastructure.csproj", "{16D70A58-4B2D-4332-8396-5ECE18D5724E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtStroke.Web.Infrastructure", "ArtStroke.Web.Infrastructure\ArtStroke.Web.Infrastructure.csproj", "{16D70A58-4B2D-4332-8396-5ECE18D5724E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtStroke.Services.Data.Models", "ArtStroke.Services.Data.Models\ArtStroke.Services.Data.Models.csproj", "{E47F3B10-66E8-4C15-A665-1716410E1539}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{16D70A58-4B2D-4332-8396-5ECE18D5724E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16D70A58-4B2D-4332-8396-5ECE18D5724E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16D70A58-4B2D-4332-8396-5ECE18D5724E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47F3B10-66E8-4C15-A665-1716410E1539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47F3B10-66E8-4C15-A665-1716410E1539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47F3B10-66E8-4C15-A665-1716410E1539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47F3B10-66E8-4C15-A665-1716410E1539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{F13FA693-260B-495E-846E-4C6E1EF4578E} = {AAB5B79D-04D2-4127-93F8-A4E3EA31F3CF}
 		{9D161255-3127-4F1D-949D-FAD5CFF2F165} = {47CDFC2A-190C-4BF2-AB9F-5DD79B86210E}
 		{16D70A58-4B2D-4332-8396-5ECE18D5724E} = {AAB5B79D-04D2-4127-93F8-A4E3EA31F3CF}
+		{E47F3B10-66E8-4C15-A665-1716410E1539} = {47CDFC2A-190C-4BF2-AB9F-5DD79B86210E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {232AEDA8-C723-470C-9FB5-0AB8B7DF4595}

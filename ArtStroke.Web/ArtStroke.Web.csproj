@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Art.Stroke.Data.Models\ArtStroke.Data.Models.csproj" />
     <ProjectReference Include="..\ArtStroke.Common\ArtStroke.Common.csproj" />
     <ProjectReference Include="..\ArtStroke.Data\ArtStroke.Data.csproj" />
+    <ProjectReference Include="..\ArtStroke.Services.Data.Models\ArtStroke.Services.Data.Models.csproj" />
     <ProjectReference Include="..\ArtStroke.Web.Infrastructure\ArtStroke.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ArtStroke.Web.ViewModels\ArtStroke.Web.ViewModels.csproj" />
     <ProjectReference Include="..\ArtWork.Services.Data\ArtStroke.Services.Data.csproj" />

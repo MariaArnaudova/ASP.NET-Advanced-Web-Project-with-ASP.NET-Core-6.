@@ -45,6 +45,8 @@ namespace ArtStroke.Data.Models
         [Required]
         public DateTime CreatingYear { get; set; }
 
+        public bool IsDesignedInPrint { get; set; } 
+
         public Guid ArtistId { get; set; }
 
         [ForeignKey("ArtistId")]

@@ -8,5 +8,7 @@ namespace ArtStroke.Services.Data.Interfaces
         Task<IEnumerable<ArtWorkStyleViewModel>> AllStylesAsync();
 
         Task<bool> StyleExistByIdAsync(int id);
+
+        Task<IEnumerable<string>> AllStyleNameAsync();
     }
 }

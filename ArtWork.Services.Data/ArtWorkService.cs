@@ -8,6 +8,8 @@ namespace ArtStroke.Services.Data
     using ArtStroke.Web.ViewModels.ArtWork;
     using ArtStroke.Data.Models;
     using ArtStroke.Data;
+    using ArtStroke.Services.Data.Models.ArtWork;
+    using ArtStroke.Web.ViewModels.ArtWork.Enums;
 
     public class ArtWorkService : IArtWorkService
     {
@@ -15,6 +17,71 @@ namespace ArtStroke.Services.Data
         public ArtWorkService(ArtStrokeDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<AllArtworksFilteredServiceModel> AllAsync(AllArtworksQueryModel queryModel)
+        {
+            IQueryable<ArtWork> artworksQuery = this.dbContext
+                 .ArtWorks
+                 .AsQueryable();
+
+            int artworksQueryCount = artworksQuery.Count();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.Style))
+            {
+                artworksQuery = artworksQuery
+                    .Where(a => a.Style.Name == queryModel.Style);
+            }
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                artworksQuery = artworksQuery
+                    .Where(a => EF.Functions.Like(a.Title, wildCard) ||
+                                EF.Functions.Like(a.Technique, wildCard) ||
+                                EF.Functions.Like(a.Artist.Name, wildCard));
+            }
+
+            artworksQuery = queryModel.WorksSorting switch
+            {
+
+                ArtWorkSorting.Newest => artworksQuery
+                .OrderBy(a => a.CreatedOn),
+                ArtWorkSorting.Oldest => artworksQuery
+                .OrderByDescending(a => a.CreatedOn),
+                ArtWorkSorting.CreatingYearAscending => artworksQuery
+                .OrderBy(a => a.CreatingYear),
+                ArtWorkSorting.CreatingYearDescending => artworksQuery
+                .OrderByDescending(a => a.CreatingYear),
+                _ => artworksQuery
+                 .OrderBy(a => a.IsDesignedInPrint == false)
+                 .ThenByDescending(a => a.CreatedOn)
+            };
+     
+
+            IEnumerable<ArtworkAllViewModel> allArtworks = await artworksQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ArtworksPerPage)
+                .Take(queryModel.ArtworksPerPage)
+                .Select(a => new ArtworkAllViewModel
+                {
+                    Id = a.Id.ToString(),
+                    Title = a.Title,
+                    ImageUrl = a.ImageUrl,
+                    Style = a.Style.Name,
+                    IsDesignedInPrint = a.IsDesignedInPrint,
+                })
+                .ToArrayAsync();
+
+            Console.WriteLine(allArtworks);
+
+            int totalArtworks = artworksQuery.Count();
+
+            return new AllArtworksFilteredServiceModel()
+            {
+                CountTotalArtworks = totalArtworks,
+                Artworks = allArtworks
+            };
         }
 
         public async Task CreateArtworkAsync(string artistId, ArtWorkFormModel model)
