@@ -36,14 +36,26 @@ namespace ArtStroke.Data.Configuration
             string yearString = "2022";
             DateTime creatingYear;
             DateTime.TryParseExact(yearString, "yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out creatingYear);
-            
+
+            artWork = new ArtWork()
+            {
+                Title = "Together",
+                Technique = "Acryl on canvas",
+                StyleId = 1,
+                Width = 25,
+                Height = 25,
+                ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/together-maria-arnaudova.jpg",
+                CreatingYear = creatingYear,
+                ArtistId = Guid.Parse("9ACB423B-F83D-4A6F-A4E3-D28271E0E828")
+            };
+
             artWork = new ArtWork()
             {
                 Title = "Single Boat",
                 Technique = "Oil on canvas",
-                StyleId = 1,
-                Width = 1000,
-                Height = 700,
+                StyleId = 2,
+                Width = 35,
+                Height = 25,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/blue-boat-maria-arnaudova.jpg",
                 CreatingYear = creatingYear,
                 ArtistId = Guid.Parse("9ACB423B-F83D-4A6F-A4E3-D28271E0E828")
@@ -54,9 +66,9 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Freshnest",
                 Technique = "Acril on canvas",
-                StyleId = 2,
-                Width = 250,
-                Height = 180,
+                StyleId = 3,
+                Width = 50,
+                Height = 50,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/split-pomegranate-maria-arnaudova.jpg",
                 CreatingYear = creatingYear,
                 ArtistId = Guid.Parse("9ACB423B-F83D-4A6F-A4E3-D28271E0E828")
@@ -67,7 +79,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Sunset over the sea",
                 Technique = "Oil on canvas",
-                StyleId = 3,
+                StyleId = 4,
                 Width = 500,
                 Height = 350,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
@@ -80,9 +92,9 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Swirling",
                 Technique = "Aquarel",
-                StyleId = 4,
-                Width = 180,
-                Height = 250,
+                StyleId = 5,
+                Width = 35,
+                Height = 50,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/swirling-of-life-maria-arnaudova.jpg",
                 CreatingYear = creatingYear,
                 ArtistId = Guid.Parse("9ACB423B-F83D-4A6F-A4E3-D28271E0E828")
