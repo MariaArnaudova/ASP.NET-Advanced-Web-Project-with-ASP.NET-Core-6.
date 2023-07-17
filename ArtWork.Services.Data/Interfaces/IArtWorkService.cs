@@ -11,7 +11,10 @@ namespace ArtStroke.Services.Data.Interfaces
 
         Task<IEnumerable<ArtworkAllViewModel>> AllArtworksByArtistIdAsync(string artistId);
         Task<AllArtworksFilteredServiceModel> AllAsync(AllArtworksQueryModel queryModel);
+        Task<ArtworkDetailsViewModel> DetailsByArtistIdAsync(string artworkId);
 
-        Task<ArtworkDetailsViewModel?> DetailsByArtistIdAsync(string artworkId);
+        Task<ArtWorkFormModel> GetArtworkForEditByIdAsync(string artworkId);
+
+        Task<bool> ExistByIdAsync(string artworkId);
     }
 }

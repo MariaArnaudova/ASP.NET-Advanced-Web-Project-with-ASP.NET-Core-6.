@@ -124,19 +124,14 @@ namespace ArtStroke.Services.Data
 
         }
 
-        public async Task<ArtworkDetailsViewModel?> DetailsByArtistIdAsync(string artworkId)
+        public async Task<ArtworkDetailsViewModel> DetailsByArtistIdAsync(string artworkId)
         {
             ArtWork? artWork = await this.dbContext
                 .ArtWorks
                 .Include(h => h.Style)
                 .Include(h => h.Artist)
                 .Where(a => a.IsActive)
-                .FirstOrDefaultAsync(a => a.Id.ToString() == artworkId);
-
-            if(artWork == null)
-            {
-                return null;
-            }
+                .FirstAsync(a => a.Id.ToString() == artworkId);
 
             return new ArtworkDetailsViewModel()
             {
@@ -153,6 +148,36 @@ namespace ArtStroke.Services.Data
                     Biography = artWork.Artist.Biography,
                     Name = artWork.Artist.Name,
                 }
+            };
+        }
+
+        public async Task<bool> ExistByIdAsync(string artworkId)
+        {
+            bool result = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .AnyAsync(a => a.Id.ToString() == artworkId);
+
+            return result;
+        }
+
+        public async Task<ArtWorkFormModel> GetArtworkForEditByIdAsync(string artworkId)
+        {
+            ArtWork artWork = await this.dbContext
+               .ArtWorks
+               .Include(h => h.Style)
+               .Where(a => a.IsActive)
+               .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            return new ArtWorkFormModel
+            {
+                Title = artWork.Title,
+                Technique = artWork.Technique,
+                CreatingYear = int.Parse(artWork.CreatingYear.ToString()),
+                Height = artWork.Height,
+                Width = artWork.Width,
+                ImageUrl = artWork.ImageUrl,
+                StyleId = artWork.StyleId,
             };
         }
 

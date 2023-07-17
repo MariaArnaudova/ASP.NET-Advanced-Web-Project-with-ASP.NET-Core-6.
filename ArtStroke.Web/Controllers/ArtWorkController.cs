@@ -29,7 +29,7 @@ namespace ArtStroke.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All([FromQuery]AllArtworksQueryModel queryModel)
+        public async Task<IActionResult> All([FromQuery] AllArtworksQueryModel queryModel)
         {
             AllArtworksFilteredServiceModel serviceModel =
                 await this.artWorkService.AllAsync(queryModel);
@@ -91,7 +91,7 @@ namespace ArtStroke.Web.Controllers
             {
                 string? artistId =
                   await this.artistService.GetArtistIdByUserIdAsync(this.User.GetId()!);
-                  await this.artWorkService.CreateArtworkAsync( artistId!, model);
+                await this.artWorkService.CreateArtworkAsync(artistId!, model);
             }
             catch (Exception _)
             {
@@ -106,19 +106,18 @@ namespace ArtStroke.Web.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Mine()
         {
-            List<ArtworkAllViewModel> myArtworks = new List<ArtworkAllViewModel>();   
+            List<ArtworkAllViewModel> myArtworks = new List<ArtworkAllViewModel>();
 
-            string userId  = this.User.GetId();
+            string userId = this.User.GetId();
             bool isUserArtist = await this.artistService
-                .HasArtistByUserIdAsync(userId);    
+                .HasArtistByUserIdAsync(userId);
 
-            if(isUserArtist) 
+            if (isUserArtist)
             {
-                string? artistId = 
-                    await this.artistService .GetArtistIdByUserIdAsync(userId);
+                string? artistId =
+                    await this.artistService.GetArtistIdByUserIdAsync(userId);
                 myArtworks.AddRange(await this.artWorkService.AllArtworksByArtistIdAsync(artistId!));
             }
             else
@@ -135,17 +134,19 @@ namespace ArtStroke.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
-            ArtworkDetailsViewModel? viewModel = await this.artWorkService
-                .DetailsByArtistIdAsync(id);
+            bool artworkExist = await this.artWorkService
+                .ExistByIdAsync(id);
 
-            if(viewModel == null)
+            if (!artworkExist)
             {
                 this.TempData[ErrorMessage] = "Artwork with this id does not exist";
                 return this.RedirectToAction("All", "ArtWork");
             }
 
-            return View(viewModel); ;
-    }
-    }
+            ArtworkDetailsViewModel viewModel = await this.artWorkService
+                .DetailsByArtistIdAsync(id);
 
+            return View(viewModel); ;
+        }
+    }
 }
