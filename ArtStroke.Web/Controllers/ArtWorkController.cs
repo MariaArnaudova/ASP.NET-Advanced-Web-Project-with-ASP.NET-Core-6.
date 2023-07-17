@@ -130,6 +130,22 @@ namespace ArtStroke.Web.Controllers
 
             return this.View(myArtworks);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            ArtworkDetailsViewModel? viewModel = await this.artWorkService
+                .DetailsByArtistIdAsync(id);
+
+            if(viewModel == null)
+            {
+                this.TempData[ErrorMessage] = "Artwork with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            return View(viewModel); ;
+    }
     }
 
 }

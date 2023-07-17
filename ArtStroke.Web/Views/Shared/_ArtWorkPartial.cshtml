@@ -10,28 +10,23 @@
                         <br />
                         <a asp-controller="ArtWork" asp-action="Details" asp-route-id="@Model.Id"
                         class="btn btn-success">Details</a>
-                        @if (this.User.Identity?.IsAuthenticated ?? false)
-                        {
-                                <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id"
+                           @if (!Model.IsDesignedInPrint)
+                           {
+                               <form class="input-group-sm mt-md-2" asp-controller="ArtWork"
+                                   asp-action="DesignInPrint" asp-route-id="@Model.Id" method="post">
+                                   <input class="btn btn-primary" type="submit" value="Begin to Design" />
+                               </form>
+                           }
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+                                    <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id"
                                      class="btn btn-warning">Edit</a>
-                                <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id"
+                                    <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id"
                                         class="btn btn-danger">Delete</a>
-                          <p></p>
-                                @if (!Model.IsDesignedInPrint)
-                                {
-                                     <form class="input-group-sm" asp-controller="ArtWork"
-                                         asp-action="DesignInPrint" asp-route-id="@Model.Id" method="post">
-                                         <input class="btn btn-primary" type="submit" value="Begin to Design" />
-                                     </form>
-                                 }
-                                     else
-                                 {
-                                  <form asp-controller="ArtWork" asp-action="Leave"
-                                        asp-route-id="@Model.Id" method="post">
-                                          <input class="btn btn-primary" type="submit" value="Leave" />
-                                  </form>
-                                 }
-                     }
+                              <p></p>
+
+
+            }
                 </div>
         </div>
 </div>

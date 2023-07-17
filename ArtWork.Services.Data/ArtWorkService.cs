@@ -10,7 +10,8 @@ namespace ArtStroke.Services.Data
     using ArtStroke.Data;
     using ArtStroke.Services.Data.Models.ArtWork;
     using ArtStroke.Web.ViewModels.ArtWork.Enums;
- 
+    using ArtStroke.Web.ViewModels.Artist;
+
     public class ArtWorkService : IArtWorkService
     {
         private readonly ArtStrokeDbContext dbContext;
@@ -121,6 +122,38 @@ namespace ArtStroke.Services.Data
             await this.dbContext.ArtWorks.AddAsync(artwor);
             await this.dbContext.SaveChangesAsync();
 
+        }
+
+        public async Task<ArtworkDetailsViewModel?> DetailsByArtistIdAsync(string artworkId)
+        {
+            ArtWork? artWork = await this.dbContext
+                .ArtWorks
+                .Include(h => h.Style)
+                .Include(h => h.Artist)
+                .Where(a => a.IsActive)
+                .FirstOrDefaultAsync(a => a.Id.ToString() == artworkId);
+
+            if(artWork == null)
+            {
+                return null;
+            }
+
+            return new ArtworkDetailsViewModel()
+            {
+                Id = artWork.Id.ToString(),
+                Height = artWork.Height,
+                Width = artWork.Width,
+                Style = artWork.Style.Name,
+                ImageUrl = artWork.ImageUrl,
+                IsDesignedInPrint = true,
+                Title = artWork.Title,
+                Technique = artWork.Technique,
+                Artist = new ArtistInfoOnArtworkViewModel
+                {
+                    Biography = artWork.Artist.Biography,
+                    Name = artWork.Artist.Name,
+                }
+            };
         }
 
         public async Task<IEnumerable<IndexViewModel>> LastThreeArtWorksAsync()
