@@ -47,6 +47,8 @@ namespace ArtStroke.Data.Models
 
         public bool IsDesignedInPrint { get; set; } 
 
+        public bool IsActive { get; set; } 
+
         public Guid ArtistId { get; set; }
 
         [ForeignKey("ArtistId")]

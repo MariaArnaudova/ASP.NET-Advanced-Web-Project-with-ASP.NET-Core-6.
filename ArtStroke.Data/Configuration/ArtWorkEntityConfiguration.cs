@@ -13,7 +13,10 @@ namespace ArtStroke.Data.Configuration
         public void Configure(EntityTypeBuilder<ArtWork> builder)
         {
             builder.Property(aw => aw.CreatedOn)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("GETDATE()");
+
+            builder.Property(aw => aw.IsActive)
+                .HasDefaultValue(true);
 
             builder.HasOne(aw => aw.Artist)
                  .WithMany(a => a.CreatedWorks)
@@ -41,7 +44,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Together",
                 Technique = "Acryl on canvas",
-                StyleId = 1,
+                StyleId = 5,
                 Width = 25,
                 Height = 25,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/together-maria-arnaudova.jpg",
@@ -53,7 +56,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Single Boat",
                 Technique = "Oil on canvas",
-                StyleId = 2,
+                StyleId = 1,
                 Width = 35,
                 Height = 25,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/blue-boat-maria-arnaudova.jpg",
@@ -66,7 +69,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Freshnest",
                 Technique = "Acril on canvas",
-                StyleId = 3,
+                StyleId = 2,
                 Width = 50,
                 Height = 50,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/split-pomegranate-maria-arnaudova.jpg",
@@ -79,7 +82,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Sunset over the sea",
                 Technique = "Oil on canvas",
-                StyleId = 4,
+                StyleId = 3,
                 Width = 500,
                 Height = 350,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
@@ -92,7 +95,7 @@ namespace ArtStroke.Data.Configuration
             {
                 Title = "Swirling",
                 Technique = "Aquarel",
-                StyleId = 5,
+                StyleId = 4,
                 Width = 35,
                 Height = 50,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/swirling-of-life-maria-arnaudova.jpg",

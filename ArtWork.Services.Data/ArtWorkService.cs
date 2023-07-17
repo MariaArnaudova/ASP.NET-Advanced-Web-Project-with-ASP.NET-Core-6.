@@ -47,9 +47,9 @@ namespace ArtStroke.Services.Data
             {
 
                 ArtWorkSorting.Newest => artworksQuery
-                .OrderBy(a => a.CreatedOn),
-                ArtWorkSorting.Oldest => artworksQuery
                 .OrderByDescending(a => a.CreatedOn),
+                ArtWorkSorting.Oldest => artworksQuery
+                .OrderBy(a => a.CreatedOn),
                 ArtWorkSorting.CreatingYearAscending => artworksQuery
                 .OrderBy(a => a.CreatingYear),
                 ArtWorkSorting.CreatingYearDescending => artworksQuery
@@ -58,9 +58,10 @@ namespace ArtStroke.Services.Data
                  .OrderBy(a => a.IsDesignedInPrint == false)
                  .ThenByDescending(a => a.CreatedOn)
             };
-     
+
 
             IEnumerable<ArtworkAllViewModel> allArtworks = await artworksQuery
+                .Where(a => a.IsActive)
                 .Skip((queryModel.CurrentPage - 1) * queryModel.ArtworksPerPage)
                 .Take(queryModel.ArtworksPerPage)
                 .Select(a => new ArtworkAllViewModel
@@ -110,6 +111,7 @@ namespace ArtStroke.Services.Data
         {
             IEnumerable<IndexViewModel> lastThreeArtWorks = await this.dbContext
                 .ArtWorks
+                .Where(a => a.IsActive)
                 .OrderByDescending(a => a.CreatedOn)
                 .Select(a => new IndexViewModel
                 {
