@@ -10,13 +10,31 @@ namespace ArtStroke.Services.Data
     using ArtStroke.Data;
     using ArtStroke.Services.Data.Models.ArtWork;
     using ArtStroke.Web.ViewModels.ArtWork.Enums;
-
+ 
     public class ArtWorkService : IArtWorkService
     {
         private readonly ArtStrokeDbContext dbContext;
         public ArtWorkService(ArtStrokeDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<ArtworkAllViewModel>> AllArtworksByArtistIdAsync(string artistId)
+        {
+            IEnumerable<ArtworkAllViewModel> allArtworksByArtist = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .Where(a => a.ArtistId.ToString() == artistId)
+                .Select(a => new ArtworkAllViewModel()
+                {
+                    Id = a.Id.ToString(),
+                    ImageUrl = a.ImageUrl,
+                    IsDesignedInPrint = a.IsDesignedInPrint,
+                    Style = a.Style.Name,
+                    Title = a.Title,
+                }).ToArrayAsync();
+
+            return allArtworksByArtist;
         }
 
         public async Task<AllArtworksFilteredServiceModel> AllAsync(AllArtworksQueryModel queryModel)
@@ -73,8 +91,6 @@ namespace ArtStroke.Services.Data
                     IsDesignedInPrint = a.IsDesignedInPrint,
                 })
                 .ToArrayAsync();
-
-            Console.WriteLine(allArtworks);
 
             int totalArtworks = artworksQuery.Count();
 

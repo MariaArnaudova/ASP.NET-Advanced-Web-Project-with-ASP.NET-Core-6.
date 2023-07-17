@@ -4,6 +4,7 @@ using ArtStroke.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtStroke.Data.Migrations
 {
     [DbContext(typeof(ArtStrokeDbContext))]
-    partial class ArtStrokeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717145359_ArtworkIdNullableGuidinPrintDesign")]
+    partial class ArtworkIdNullableGuidinPrintDesign
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,7 +211,7 @@ namespace ArtStroke.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("82162468-f9e1-461d-8a3a-aea6298ed3ce"),
+                            Id = new Guid("927a45c2-ea60-46c9-81ae-bb9b256cbf02"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -224,7 +226,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1e54204d-e281-4bc1-97d1-87b37e5ba83d"),
+                            Id = new Guid("f7aad5fa-ed40-470f-8ead-2084eb907941"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -239,7 +241,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4fd64dbc-1f76-47ec-b4e4-743bdb87e248"),
+                            Id = new Guid("a3c2aae9-6605-4e18-a03b-f4235577561a"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -254,7 +256,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6807e797-0e08-4924-b459-ac4247e3b39b"),
+                            Id = new Guid("d196b38a-01c5-4179-8c26-5d3066e36959"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -328,11 +330,6 @@ namespace ArtStroke.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
 
                     b.Property<string>("Title")
                         .IsRequired()

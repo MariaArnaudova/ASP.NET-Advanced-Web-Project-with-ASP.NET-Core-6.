@@ -9,7 +9,7 @@ namespace ArtStroke.Common
             public const int TitleMaxLengt = 30;
 
             public const int TechniqueMinLengt = 4;
-            public const int TechniqueMaxLengt = 30;           
+            public const int TechniqueMaxLengt = 30;
 
             public const int MinWidth = 6;
             public const int MinHeight = 6;
@@ -26,9 +26,14 @@ namespace ArtStroke.Common
 
         public static class PrintDesign
         {
+            public const int TitleMinLengt = 2;
+            public const int TitleMaxLengt = 30;
+
             public const int CreatorNameMinLength = 4;
 
             public const int CreatorNameMaxLength = 30;
+
+            public const int ImageUrlMaxLengt = 2048;
 
             public const int MinWidth = 6;
 

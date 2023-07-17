@@ -104,6 +104,32 @@ namespace ArtStroke.Web.Controllers
 
             return this.RedirectToAction("All", "ArtWork");
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Mine()
+        {
+            List<ArtworkAllViewModel> myArtworks = new List<ArtworkAllViewModel>();   
+
+            string userId  = this.User.GetId();
+            bool isUserArtist = await this.artistService
+                .HasArtistByUserIdAsync(userId);    
+
+            if(isUserArtist) 
+            {
+                string? artistId = 
+                    await this.artistService .GetArtistIdByUserIdAsync(userId);
+                myArtworks.AddRange(await this.artWorkService.AllArtworksByArtistIdAsync(artistId!));
+            }
+            else
+            {
+                //TODO
+                return RedirectToAction("Design", "AllPrints");
+                //myArtworks.AddRange(await this.artWorkService.AllArtworksPrintsByUserIdAsync(userId));
+            }
+
+            return this.View(myArtworks);
+        }
     }
 
 }

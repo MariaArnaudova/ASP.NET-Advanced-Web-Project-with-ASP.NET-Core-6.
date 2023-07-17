@@ -4,6 +4,7 @@ using ArtStroke.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtStroke.Data.Migrations
 {
     [DbContext(typeof(ArtStrokeDbContext))]
-    partial class ArtStrokeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717152155_AddIsActiveColumnOnPrintDesign")]
+    partial class AddIsActiveColumnOnPrintDesign
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,68 +207,6 @@ namespace ArtStroke.Data.Migrations
                     b.HasIndex("StyleId");
 
                     b.ToTable("ArtWorks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("82162468-f9e1-461d-8a3a-aea6298ed3ce"),
-                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Height = 25,
-                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/blue-boat-maria-arnaudova.jpg",
-                            IsActive = false,
-                            IsDesignedInPrint = false,
-                            StyleId = 1,
-                            Technique = "Oil on canvas",
-                            Title = "Single Boat",
-                            Width = 35
-                        },
-                        new
-                        {
-                            Id = new Guid("1e54204d-e281-4bc1-97d1-87b37e5ba83d"),
-                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Height = 50,
-                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/split-pomegranate-maria-arnaudova.jpg",
-                            IsActive = false,
-                            IsDesignedInPrint = false,
-                            StyleId = 2,
-                            Technique = "Acril on canvas",
-                            Title = "Freshnest",
-                            Width = 50
-                        },
-                        new
-                        {
-                            Id = new Guid("4fd64dbc-1f76-47ec-b4e4-743bdb87e248"),
-                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Height = 350,
-                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
-                            IsActive = false,
-                            IsDesignedInPrint = false,
-                            StyleId = 3,
-                            Technique = "Oil on canvas",
-                            Title = "Sunset over the sea",
-                            Width = 500
-                        },
-                        new
-                        {
-                            Id = new Guid("6807e797-0e08-4924-b459-ac4247e3b39b"),
-                            ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Height = 50,
-                            ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/swirling-of-life-maria-arnaudova.jpg",
-                            IsActive = false,
-                            IsDesignedInPrint = false,
-                            StyleId = 4,
-                            Technique = "Aquarel",
-                            Title = "Swirling",
-                            Width = 35
-                        });
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.NewTechiqueArt", b =>

@@ -2,12 +2,17 @@
 namespace ArtStroke.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Reflection.Metadata;
     using static Common.EntityValidationConstants.PrintDesign;
     public class PrintDesign
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [MaxLength(TitleMaxLengt)]
+        public string Title { get; set; } = null!;
 
         [Required]
         [Range(MinWidth, int.MaxValue)]
@@ -21,13 +26,23 @@ namespace ArtStroke.Data.Models
         [MaxLength(CreatorNameMaxLength)]
         public string CreatorName { get; set; } = null!;
 
+        public string? Description { get; set; } = null!;
+
+        [Required]
+        [MaxLength(ImageUrlMaxLengt)]
+        public string ImageUrl { get; set; } = null!;
+
         [Required]
         public Guid? UserId { get; set; }
+
         public virtual ApplicationUser User { get; set; } = null!;
 
-        public Guid ArtWorkId { get; set; } 
+        public bool IsActive { get; set; }  
+    
+        public Guid? ArtWorkId { get; set; } 
 
-        public ArtWork ArtWork { get; set; } = null!;
+        [ForeignKey("ArtWorkId")]
+        public ArtWork? ArtWork { get; set; }
 
     }
 }
