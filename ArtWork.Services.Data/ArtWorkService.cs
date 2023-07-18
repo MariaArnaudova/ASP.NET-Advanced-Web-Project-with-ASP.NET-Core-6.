@@ -103,12 +103,12 @@ namespace ArtStroke.Services.Data
             };
         }
 
-        public async Task CreateArtworkAsync(string artistId, ArtWorkFormModel model)
+        public async Task<string> CreateArtworkAsync(string artistId, ArtWorkFormModel model)
         {
             int year = model.CreatingYear;
             DateTime date = new DateTime(year, 1, 1);
 
-            ArtWork artwor = new ArtWork()
+            ArtWork artwork = new ArtWork()
             {
                 Title = model.Title,
                 Height = model.Height,
@@ -120,8 +120,10 @@ namespace ArtStroke.Services.Data
                 Technique = model.Technique,
             };
 
-            await this.dbContext.ArtWorks.AddAsync(artwor);
+            await this.dbContext.ArtWorks.AddAsync(artwork);
             await this.dbContext.SaveChangesAsync();
+
+            return artwork.Id.ToString();
 
         }
 
@@ -164,6 +166,7 @@ namespace ArtStroke.Services.Data
             artwork.Technique = model.Technique;
             artwork.Width = model.Width;
             artwork.Height = model.Height;
+            artwork.ImageUrl= model.ImageUrl;   
                     
             if (DateTime.TryParseExact(model.CreatingYear.ToString(), "yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime creatingYear))
             {

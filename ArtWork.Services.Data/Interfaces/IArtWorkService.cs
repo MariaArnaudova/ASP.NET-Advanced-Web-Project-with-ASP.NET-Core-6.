@@ -7,7 +7,7 @@ namespace ArtStroke.Services.Data.Interfaces
     public interface IArtWorkService
     {
         Task<IEnumerable<IndexViewModel>> LastThreeArtWorksAsync();
-        Task CreateArtworkAsync(string artistId, ArtWorkFormModel model);
+        Task<string> CreateArtworkAsync(string artistId, ArtWorkFormModel model);
 
         Task<IEnumerable<ArtworkAllViewModel>> AllArtworksByArtistIdAsync(string artistId);
         Task<AllArtworksFilteredServiceModel> AllAsync(AllArtworksQueryModel queryModel);
