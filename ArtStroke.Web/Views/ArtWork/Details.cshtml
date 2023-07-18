@@ -4,18 +4,19 @@
 }
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-<div class="container" style="display:inline">
-    <div class="row">
+<div class="container " style="display:inline">
+    <div class="row ">
         <div class="col-4">
-                <img class="card-img-top" style="width: 20rem;" src="@Model.ImageUrl" alt="House Image">
+                <img class="card-img-top" style="width: 20rem;" src="@Model.ImageUrl" alt="Artwork Image">
         </div>
-        <div class="card col-8 border-0 d-flex justify-content-between" style="display:inline-block">
+        <div class="card col-8 border-0 d-flex justify-content-between bg-light bg-opacity-75" style="display:inline-block">
             <div class="container" style="display:inline">
                   <p style="font-size:25px;"><u>@Model.Title</u></p>
                   <p>Located in: <b>@Model.Technique</b></p>
                   <p class="">Style: <b>@Model.Style</b></p>
                   <p>Width: <b>@Model.Width</b></p>
                   <p>Height: <b>@Model.Height</b></p>
+                  <p>Creating Year: <b>@Model.CreatingYear</b></p>
                   <p><i>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</i></p>
             </div>
             <div class="container" style="display:inline">

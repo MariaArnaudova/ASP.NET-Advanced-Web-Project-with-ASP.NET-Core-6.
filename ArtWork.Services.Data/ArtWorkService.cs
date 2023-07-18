@@ -11,6 +11,7 @@ namespace ArtStroke.Services.Data
     using ArtStroke.Services.Data.Models.ArtWork;
     using ArtStroke.Web.ViewModels.ArtWork.Enums;
     using ArtStroke.Web.ViewModels.Artist;
+    using System.Globalization;
 
     public class ArtWorkService : IArtWorkService
     {
@@ -143,12 +144,39 @@ namespace ArtStroke.Services.Data
                 IsDesignedInPrint = true,
                 Title = artWork.Title,
                 Technique = artWork.Technique,
+                CreatingYear = artWork.CreatingYear.Year.ToString(),
                 Artist = new ArtistInfoOnArtworkViewModel
                 {
                     Biography = artWork.Artist.Biography,
                     Name = artWork.Artist.Name,
                 }
             };
+        }
+
+        public async Task EditArtworkBtIdInFormModel(string artworkId, ArtWorkFormModel model)
+        {
+            ArtWork artwork = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            artwork.Title = model.Title;
+            artwork.Technique = model.Technique;
+            artwork.Width = model.Width;
+            artwork.Height = model.Height;
+                    
+            if (DateTime.TryParseExact(model.CreatingYear.ToString(), "yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime creatingYear))
+            {
+                artwork.CreatingYear = creatingYear;
+            }
+            else
+            {    
+                artwork.CreatingYear = DateTime.MinValue;
+            }
+
+            artwork.IsDesignedInPrint = model.IsDesignedInPrint;
+
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> ExistByIdAsync(string artworkId)
@@ -173,12 +201,22 @@ namespace ArtStroke.Services.Data
             {
                 Title = artWork.Title,
                 Technique = artWork.Technique,
-                CreatingYear = int.Parse(artWork.CreatingYear.ToString()),
+                CreatingYear = int.Parse(artWork.CreatingYear.Year.ToString()),
                 Height = artWork.Height,
                 Width = artWork.Width,
                 ImageUrl = artWork.ImageUrl,
                 StyleId = artWork.StyleId,
             };
+        }
+
+        public async Task<bool> IsArtistCreatorOfArtwork(string artworkId, string artistId)
+        {
+            ArtWork artWork = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            return artWork.ArtistId.ToString() == artistId;
         }
 
         public async Task<IEnumerable<IndexViewModel>> LastThreeArtWorksAsync()

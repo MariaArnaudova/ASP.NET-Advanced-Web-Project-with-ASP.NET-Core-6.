@@ -46,6 +46,8 @@ namespace ArtStroke.Web.ViewModels.ArtWork
 
         public int StyleId { get; set; }
 
+        public bool IsDesignedInPrint { get; set; } 
+
         [Required]
         public IEnumerable<ArtWorkStyleViewModel> Styles { get; set; } = null!;
     }

@@ -1,0 +1,13 @@
+﻿@model ArtWorkFormModel
+
+@{
+    ViewData["Title"] = "Edit Artwork";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+<partial name="_ArtworkFormPartial" model="@Model"/>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
