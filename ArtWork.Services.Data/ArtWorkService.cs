@@ -127,6 +127,22 @@ namespace ArtStroke.Services.Data
 
         }
 
+        public Task<string> CreateDesignArtworkAsync(string artistId, ArtWorkFormModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteArtworkByIdAsync(string artworkId)
+        {
+            ArtWork artwork = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            artwork.IsActive= false;
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<ArtworkDetailsViewModel> DetailsByArtistIdAsync(string artworkId)
         {
             ArtWork? artWork = await this.dbContext
@@ -166,14 +182,14 @@ namespace ArtStroke.Services.Data
             artwork.Technique = model.Technique;
             artwork.Width = model.Width;
             artwork.Height = model.Height;
-            artwork.ImageUrl= model.ImageUrl;   
-                    
+            artwork.ImageUrl = model.ImageUrl;
+
             if (DateTime.TryParseExact(model.CreatingYear.ToString(), "yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime creatingYear))
             {
                 artwork.CreatingYear = creatingYear;
             }
             else
-            {    
+            {
                 artwork.CreatingYear = DateTime.MinValue;
             }
 
@@ -194,11 +210,11 @@ namespace ArtStroke.Services.Data
 
         public async Task<ArtworkDeleteViewModel> GetArtworkDeleteBtIdInAsync(string artworkId)
         {
-           ArtWork artWork = await this.dbContext
-                .ArtWorks
-                 .Include(h => h.Style)
-                .Where(a => a.IsActive)
-                .FirstAsync(a => a.Id.ToString() == artworkId);
+            ArtWork artWork = await this.dbContext
+                 .ArtWorks
+                  .Include(h => h.Style)
+                 .Where(a => a.IsActive)
+                 .FirstAsync(a => a.Id.ToString() == artworkId);
 
             return new ArtworkDeleteViewModel
             {

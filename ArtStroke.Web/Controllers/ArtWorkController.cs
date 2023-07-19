@@ -313,6 +313,62 @@ namespace ArtStroke.Web.Controllers
                 return this.RedirectToAction("Index", "ArtWork");
             }
         }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Delete(string id, ArtworkDeleteViewModel model)
+        {
+            bool artworkExist = await this.artWorkService
+               .ExistByIdAsync(id);
+
+            if (!artworkExist)
+            {
+                this.TempData[ErrorMessage] = "Artwork with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            bool isUserArtist = await this.artistService
+                .HasArtistByUserIdAsync(this.User.GetId());
+
+            if (!isUserArtist)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
+                return this.RedirectToAction("Become", "Artist");
+            }
+
+            string artistId = await this.artistService.GetArtistIdByUserIdAsync(this.User.GetId()!);
+            bool isArtistCreator = await this.artWorkService
+                .IsArtistCreatorOfArtwork(id, artistId);
+
+            if (!isArtistCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit artwork, must be creator on it";
+                return this.RedirectToAction("Mine", "House");
+            }
+
+            try
+            {
+                await this.artWorkService.DeleteArtworkByIdAsync(id);
+                this.TempData[WarningMessage] = $"The artwork {model.Title} was successfully deleted.";
+                return this.RedirectToAction("Mine", "ArtWork");
+            }
+            catch (Exception ex)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "ArtWork");
+            }
+        }
+
+
+        [HttpGet]
+
+        public async Task<IActionResult>Design(string id)
+        {
+            //TODO
+            return View(id);
+        }
     }
+
 }
 

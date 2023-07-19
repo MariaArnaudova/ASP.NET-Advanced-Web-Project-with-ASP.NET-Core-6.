@@ -22,5 +22,9 @@ namespace ArtStroke.Services.Data.Interfaces
         Task EditArtworkBtIdInFormModelAsync(string artworkId, ArtWorkFormModel model);
 
         Task<ArtworkDeleteViewModel> GetArtworkDeleteBtIdInAsync(string artworkId);
+
+        Task DeleteArtworkByIdAsync(string artworkId);  
+
+        Task<string> CreateDesignArtworkAsync(string artistId, ArtWorkFormModel model);
     }
 }

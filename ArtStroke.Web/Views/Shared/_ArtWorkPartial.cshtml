@@ -8,20 +8,20 @@
 
                         <h6>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</h6>
                         <br />
-                        <a asp-controller="ArtWork" asp-action="Details" asp-route-id="@Model.Id"
+                        <a asp-controller="ArtWork" asp-action="Details" asp-route-id="@Model.Id" style="border-radius: 20px"
                         class="btn btn-success">Details</a>
                            @if (!Model.IsDesignedInPrint)
                            {
-                               <form class="input-group-sm mt-md-2" asp-controller="ArtWork"
-                                   asp-action="DesignInPrint" asp-route-id="@Model.Id" method="post">
-                                   <input class="btn btn-primary" type="submit" value="Begin to Design" />
+                                   <form class="input-group-sm mt-md-2 mb-2" asp-controller="ArtWork"
+                                   asp-action="Design" asp-route-id="@Model.Id" method="post" >
+                                       <input class="btn btn-primary" type="submit" value="Begin to Design" style="border-radius: 20px"/>
                                </form>
                            }
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
-                                    <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id"
+                                        <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
                                      class="btn btn-warning">Edit</a>
-                                    <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id"
+                                        <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
                                         class="btn btn-danger">Delete</a>
                               <p></p>
 

@@ -20,27 +20,27 @@
                   <p><i>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</i></p>
             </div>
             <div class="container shadow-sm" style="display:inline">
-             <div class="form-inline">
-                     @if (this.User.Identity?.IsAuthenticated ?? false)
-                     {
-                          <a class="btn btn-warning" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                          <a class="ml-2 btn btn-danger" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                         @if (!Model.IsDesignedInPrint)
+             <div class="form-inline d-flex justify-content-sm-evenly">
+                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    {
+                      <a class="btn btn-warning col-3" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                          <a class="ml-2 btn btn-danger col-3" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+
+                          <form class="ml-2 col-3" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id" method="post">
+                           <input class="btn btn-primary" type="submit" value="Design" />
+                     </form>
+
+                        @* else
                          {
-                            <form class="ml-2" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id" method="post">
-                                  <input class="btn btn-primary" type="submit" value="Design" />
-                            </form>
-                         }
-                         else
-                         {
-                             <a href="@Url.Action("PrintDesign", "Details")" class="btn btn-success btn-block">Print Design Gallery</a>
-                         }
-                     }
+                               <a class="ml-2 btn btn-danger" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id">Print Design</a>
+                               <a href="@Url.Action("Design", "Artwork")" class="btn btn-success btn-block">Print Design Gallery</a>*@
+                        @*}*@
+                    }
              </div>      
 
 <p></p>
-        
-        
+
+
               <div class="card" style="width: 18rem;">
                   <div class="card-body">
                       <h5 class="card-title">Artist Info</h5>
@@ -48,7 +48,7 @@
                       <p class="card-text">Biography: @Model.Artist.Biography</p>
                   </div>
               </div>
-        
+
         </div>
         </div>
     </div>
