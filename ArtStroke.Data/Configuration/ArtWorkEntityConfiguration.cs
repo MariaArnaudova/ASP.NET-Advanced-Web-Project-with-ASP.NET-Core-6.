@@ -83,8 +83,8 @@ namespace ArtStroke.Data.Configuration
                 Title = "Sunset over the sea",
                 Technique = "Oil on canvas",
                 StyleId = 3,
-                Width = 500,
-                Height = 350,
+                Width = 50,
+                Height = 35,
                 ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
                 CreatingYear = creatingYear,
                 ArtistId = Guid.Parse("9ACB423B-F83D-4A6F-A4E3-D28271E0E828")

@@ -155,7 +155,7 @@ namespace ArtStroke.Services.Data
             };
         }
 
-        public async Task EditArtworkBtIdInFormModel(string artworkId, ArtWorkFormModel model)
+        public async Task EditArtworkBtIdInFormModelAsync(string artworkId, ArtWorkFormModel model)
         {
             ArtWork artwork = await this.dbContext
                 .ArtWorks
@@ -190,6 +190,23 @@ namespace ArtStroke.Services.Data
                 .AnyAsync(a => a.Id.ToString() == artworkId);
 
             return result;
+        }
+
+        public async Task<ArtworkDeleteViewModel> GetArtworkDeleteBtIdInAsync(string artworkId)
+        {
+           ArtWork artWork = await this.dbContext
+                .ArtWorks
+                 .Include(h => h.Style)
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            return new ArtworkDeleteViewModel
+            {
+                Author = artWork.Artist.Name,
+                Title = artWork.Title,
+                ImageUrl = artWork.ImageUrl,
+                Style = artWork.Style.Name,
+            };
         }
 
         public async Task<ArtWorkFormModel> GetArtworkForEditByIdAsync(string artworkId)

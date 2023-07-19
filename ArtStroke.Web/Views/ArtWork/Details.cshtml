@@ -6,20 +6,20 @@
 <hr />
 <div class="container " style="display:inline">
     <div class="row ">
-        <div class="col-4">
-                <img class="card-img-top" style="width: 20rem;" src="@Model.ImageUrl" alt="Artwork Image">
+        <div class="col-7 d-flex justify-content-center">
+                <img class="card-img-top shadow-lg" style="width: 80%" src="@Model.ImageUrl" alt="Artwork Image">
         </div>
-        <div class="card col-8 border-0 d-flex justify-content-between bg-light bg-opacity-75" style="display:inline-block">
+        <div class="card col-5 border-0 d-flex justify-content-between bg-light bg-opacity-75" style="display:inline-block">
             <div class="container" style="display:inline">
                   <p style="font-size:25px;"><u>@Model.Title</u></p>
                   <p>Located in: <b>@Model.Technique</b></p>
                   <p class="">Style: <b>@Model.Style</b></p>
-                  <p>Width: <b>@Model.Width</b></p>
-                  <p>Height: <b>@Model.Height</b></p>
+                  <p>Width: <b>@Model.Width cm</b></p>
+                  <p>Height: <b>@Model.Height cm</b></p>
                   <p>Creating Year: <b>@Model.CreatingYear</b></p>
                   <p><i>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</i></p>
             </div>
-            <div class="container" style="display:inline">
+            <div class="container shadow-sm" style="display:inline">
              <div class="form-inline">
                      @if (this.User.Identity?.IsAuthenticated ?? false)
                      {
@@ -33,7 +33,7 @@
                          }
                          else
                          {
-                             <a href="@Url.Action("PrintDesign", "Details")" class="btn btn-success btn-block">Gallery</a>
+                             <a href="@Url.Action("PrintDesign", "Details")" class="btn btn-success btn-block">Print Design Gallery</a>
                          }
                      }
              </div>      

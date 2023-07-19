@@ -19,6 +19,8 @@ namespace ArtStroke.Services.Data.Interfaces
 
         Task<bool> IsArtistCreatorOfArtwork(string artworkId, string artistId);
 
-        Task EditArtworkBtIdInFormModel(string artworkId, ArtWorkFormModel model);
+        Task EditArtworkBtIdInFormModelAsync(string artworkId, ArtWorkFormModel model);
+
+        Task<ArtworkDeleteViewModel> GetArtworkDeleteBtIdInAsync(string artworkId);
     }
 }

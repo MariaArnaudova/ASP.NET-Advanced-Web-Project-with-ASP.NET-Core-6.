@@ -10,6 +10,7 @@ namespace ArtStroke.Web.Controllers
     using ArtStroke.Web.Infrastructure.Extentions;
     using ArtStroke.Web.ViewModels.ArtWork;
     using ArtStroke.Services.Data.Models.ArtWork;
+    using static ArtStroke.Common.EntityValidationConstants;
 
     [Authorize]
     public class ArtWorkController : Controller
@@ -66,7 +67,7 @@ namespace ArtStroke.Web.Controllers
                 this.TempData[ErrorMessage] = "Unexpected error";
 
                 return this.RedirectToAction("Index", "ArtWork");
-            } 
+            }
         }
 
         [HttpPost]
@@ -99,18 +100,16 @@ namespace ArtStroke.Web.Controllers
             {
                 string? artistId =
                   await this.artistService.GetArtistIdByUserIdAsync(this.User.GetId()!);
-                await this.artWorkService.CreateArtworkAsync(artistId!, model);
+                string artworkId = await this.artWorkService.CreateArtworkAsync(artistId!, model);
+                return this.RedirectToAction("Details", "ArtWork", new { id = artworkId });
             }
             catch (Exception _)
             {
 
                 this.ModelState.AddModelError(string.Empty, "Unexpected error at the creating artwork");
                 model.Styles = await this.styleService.AllStylesAsync();
-
                 return this.View(model);
             }
-
-            return this.RedirectToAction("All", "ArtWork");
         }
 
         [HttpGet]
@@ -253,7 +252,7 @@ namespace ArtStroke.Web.Controllers
 
             try
             {
-                await this.artWorkService.EditArtworkBtIdInFormModel(id, model);
+                await this.artWorkService.EditArtworkBtIdInFormModelAsync(id, model);
             }
             catch (Exception ex)
             {
@@ -264,11 +263,55 @@ namespace ArtStroke.Web.Controllers
                 return this.View(model);
             }
 
-            //ArtWorkFormModel formModel = await this.artWorkService
-            //    .GetArtworkForEditByIdAsync(id);
-            //formModel.Styles = await this.styleService.AllStylesAsync();
-
             return this.RedirectToAction("Details", "ArtWork", new { id });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+           
+            bool artworkExist = await this.artWorkService
+               .ExistByIdAsync(id);
+
+            if (!artworkExist)
+            {
+                this.TempData[ErrorMessage] = "Artwork with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            bool isUserArtist = await this.artistService
+                .HasArtistByUserIdAsync(this.User.GetId());
+
+            if (!isUserArtist)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
+                return this.RedirectToAction("Become", "Artist");
+            }
+
+            string artistId = await this.artistService.GetArtistIdByUserIdAsync(this.User.GetId()!);
+            bool isArtistCreator = await this.artWorkService
+                .IsArtistCreatorOfArtwork(id, artistId);
+
+            if (!isArtistCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit artwork,must be creator on it";
+                return this.RedirectToAction("Mine", "House");
+            }
+
+            try
+            {
+                ArtworkDeleteViewModel viewModel =
+                    await this.artWorkService.GetArtworkDeleteBtIdInAsync(id);
+
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "ArtWork");
+            }
         }
     }
 }

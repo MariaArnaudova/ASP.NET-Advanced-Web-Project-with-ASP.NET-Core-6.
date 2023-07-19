@@ -21,6 +21,7 @@ namespace ArtStroke.Web.ViewModels.ArtWork
         [Display(Name = "Height on desighed artwork")]
         public int Height { get; set; }
 
+
         [Display(Name = "Year on creating of artwork")]
         public string CreatingYear { get; set; } = null!; 
 
