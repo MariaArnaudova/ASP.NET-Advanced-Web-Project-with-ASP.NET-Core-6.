@@ -4,8 +4,6 @@ namespace ArtStroke.Web.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using static Common.NotificationMessagesConstants;
-    using ArtStroke.Data.Models;
-    using System.Globalization;
     using ArtStroke.Services.Data.Interfaces;
     using ArtStroke.Web.Infrastructure.Extentions;
     using ArtStroke.Web.ViewModels.ArtWork;
@@ -78,7 +76,7 @@ namespace ArtStroke.Web.Controllers
             if (!isArtist)
             {
                 this.TempData[ErrorMessage] = "You must become an artist";
-                return this.RedirectToAction("Become", "Artis");
+                return this.RedirectToAction("Become", "Artist");
             }
 
             bool isStyleExists =
@@ -129,9 +127,8 @@ namespace ArtStroke.Web.Controllers
             }
             else
             {
-                //TODO
-                return RedirectToAction("Design", "AllPrints");
-                //myArtworks.AddRange(await this.artWorkService.AllArtworksPrintsByUserIdAsync(userId));
+     
+                return RedirectToAction("All", "ArtWork");               
             }
 
             return this.View(myArtworks);
@@ -315,7 +312,6 @@ namespace ArtStroke.Web.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Delete(string id, ArtworkDeleteViewModel model)
         {
             bool artworkExist = await this.artWorkService
@@ -362,11 +358,77 @@ namespace ArtStroke.Web.Controllers
 
 
         [HttpGet]
-
-        public async Task<IActionResult>Design(string id)
+        public async Task<IActionResult> Design (string id)
         {
-            //TODO
-            return View(id);
+            string usertId = this.User.GetId()!;
+
+            if(usertId == null)
+            {
+                this.TempData[ErrorMessage] = "User with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            bool artworkExist = await this.artWorkService
+              .ExistByIdAsync(id);
+
+            if (!artworkExist)
+            {
+                this.TempData[ErrorMessage] = "Artwork with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            try
+            {
+                ArtWorkBecomePrintDesignFormModel formModel = new ArtWorkBecomePrintDesignFormModel();
+                
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "ArtWork");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Design(string id, ArtWorkBecomePrintDesignFormModel model)
+        {
+            string usertId = this.User.GetId()!;
+
+            if (usertId == null)
+            {
+                this.TempData[ErrorMessage] = "User with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            bool artworkExist = await this.artWorkService
+              .ExistByIdAsync(id);
+
+            if (!artworkExist)
+            {
+                this.TempData[ErrorMessage] = "Artwork with this id does not exist";
+                return this.RedirectToAction("All", "ArtWork");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            try
+            {
+
+                string printId = await this.artWorkService.CreateDesignArtworkAsync(usertId, id, model);
+                return this.RedirectToAction("Details", "ArtWork", new { id = id });
+            }
+            catch (Exception _)
+            {
+
+                this.ModelState.AddModelError(string.Empty, "Unexpected error at the creating print design");
+                return this.View(model);
+            }
+
         }
     }
 

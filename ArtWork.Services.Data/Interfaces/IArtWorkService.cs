@@ -17,6 +17,9 @@ namespace ArtStroke.Services.Data.Interfaces
 
         Task<bool> ExistByIdAsync(string artworkId);
 
+        Task<bool> IsMadeOnPrintDesign(string artworkId);
+
+
         Task<bool> IsArtistCreatorOfArtwork(string artworkId, string artistId);
 
         Task EditArtworkBtIdInFormModelAsync(string artworkId, ArtWorkFormModel model);
@@ -25,6 +28,8 @@ namespace ArtStroke.Services.Data.Interfaces
 
         Task DeleteArtworkByIdAsync(string artworkId);  
 
-        Task<string> CreateDesignArtworkAsync(string artistId, ArtWorkFormModel model);
+        Task<string> CreateDesignArtworkAsync(string artistId, string artworkId, ArtWorkBecomePrintDesignFormModel model);
+
+
     }
 }

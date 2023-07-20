@@ -1,20 +1,21 @@
 ﻿@model List<ArtworkAllViewModel>
 @{
-        ViewData["Titele"] = "My Artworks";
-    }
+    ViewData["Title"] = "My Artworks";
+}
     <h2 class="text-center">@ViewData["Title"]</h2>
     <hr />
 
-    @if(!Model.Any())
-    {
+@if (!Model.Any())
+{
             <h2 class="text-center">You do not have any artworks!</h2>
-    }
-    else
-    {
-        <div class="row">
-           @foreach(ArtworkAllViewModel artwork in Model)
-           {
-               <partial name="_ArtWorkPartial" model="artwork"/>
-           }
-        </div>
-    }
+}
+else
+{
+         
+            <div class="row">
+        @foreach (ArtworkAllViewModel artwork in Model)
+        {
+                       <partial name="_ArtWorkPartial" model="artwork"/>
+        }
+            </div>
+}

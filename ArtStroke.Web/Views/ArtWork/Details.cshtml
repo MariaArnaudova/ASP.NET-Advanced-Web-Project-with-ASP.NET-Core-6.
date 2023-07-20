@@ -20,16 +20,21 @@
                   <p><i>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</i></p>
             </div>
             <div class="container shadow-sm" style="display:inline">
-             <div class="form-inline d-flex justify-content-sm-evenly">
+             <div class="row form-inline justify-content-sm-between">
                     @if (this.User.Identity?.IsAuthenticated ?? false)
                     {
-                      <a class="btn btn-warning col-3" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                          <a class="ml-2 btn btn-danger col-3" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                              <a class="btn btn-warning col-2 shadow-lg" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                              <a class="ml-2 btn btn-danger col-2 shadow-lg" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 
-                          <form class="ml-2 col-3" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id" method="post">
+                       @*   <form class="ml-2 " asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id" method="post">
                            <input class="btn btn-primary" type="submit" value="Design" />
-                     </form>
+                          </form>*@
+                               <a class="ml-2 btn btn-info col-3 shadow-lg" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id">Design</a>
 
+                        @if (Model.IsDesignedInPrint == true)
+                        {
+                                                            <a class="ml-2 btn btn-light col-4 shadow-lg" asp-controller="PrintDesign" asp-action="GetPrints" asp-route-id="@Model.Id">Print Design Gallery</a>
+                        }
                         @* else
                          {
                                <a class="ml-2 btn btn-danger" asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id">Print Design</a>

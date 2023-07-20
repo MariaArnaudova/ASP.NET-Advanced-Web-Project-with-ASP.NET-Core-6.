@@ -4,7 +4,7 @@
         <div class="card mb-3 shadow-lg">
                 <img class="card-img-top" src="@Model.ImageUrl" alt="Artwork Image">
                 <div class="card-body text-center">
-                        <h4>@Model.Title</h4>
+                        <h4 class="shadow-sm rounded-pill">@Model.Title</h4>
 
                         <h6>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</h6>
                         <br />
@@ -17,16 +17,18 @@
                                        <input class="btn btn-primary" type="submit" value="Begin to Design" style="border-radius: 20px"/>
                                </form>
                            }
-            @if (this.User.Identity?.IsAuthenticated ?? false)
-            {
-                                        <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
-                                     class="btn btn-warning">Edit</a>
-                                        <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
-                                        class="btn btn-danger">Delete</a>
-                              <p></p>
-
-
-            }
+                           @if (Model.IsDesignedInPrint == true)
+                           {
+                              <a class="ml-2 btn btn-light col-4 shadow-lg rounded-pill" asp-controller="PrintDesign" asp-action="GetPrints" asp-route-id="@Model.Id">Print Design Gallery</a>
+                           }
+                           @if (this.User.Identity?.IsAuthenticated ?? false)
+                           {
+                              <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                 class="btn btn-warning">Edit</a>
+                              <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                          class="btn btn-danger">Delete</a>
+                                <p></p>
+                           }
                 </div>
         </div>
 </div>

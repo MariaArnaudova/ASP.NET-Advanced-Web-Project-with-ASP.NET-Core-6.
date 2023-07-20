@@ -12,7 +12,10 @@ namespace ArtStroke.Common
             public const int TechniqueMaxLengt = 30;
 
             public const int MinWidth = 6;
+            public const int MaxWidth = 1000;
+
             public const int MinHeight = 6;
+            public const int MaxHeight = 1000;
 
             public const int ImageUrlMaxLengt = 2048;
         }
@@ -36,8 +39,10 @@ namespace ArtStroke.Common
             public const int ImageUrlMaxLengt = 2048;
 
             public const int MinWidth = 6;
+            public const int MaxWidth = 1000;
 
             public const int MinHeight = 6;
+            public const int MaxHeight = 1000;
         }
 
 

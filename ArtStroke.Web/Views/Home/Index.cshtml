@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<IndexViewModel>
 @{
     ViewData["Title"] = "Home Page";
-    var houses = Model.ToList();
+    var artworks = Model.ToList();
 }
 @if (!Model.Any())
 {
@@ -15,7 +15,7 @@
         <p class="lead">
             @if (User.Identity?.IsAuthenticated ?? false)
             {
-               <a asp-controller="House" asp-action="Add" class="btn btn-primary btn-lg"role="button">Add House</a>
+               <a asp-controller="ArtWork" asp-action="Add" class="btn btn-primary btn-lg"role="button">Add Artwork</a>
             }
         </p>
   </div>
@@ -25,14 +25,14 @@
            @*  <div  > 
         <img style="width: 100%; height: 100vh; " src="/imgs/Stroke_Transparent_Multi_2.png" alt="Art Stroke"/></div>*@
 <div class="carousel-inner  mx-auto" style="border-radius: 10px">
-        @for (int i = 0; i < houses.Count(); i++)
+        @for (int i = 0; i < artworks.Count(); i++)
         {
-            var house = houses[i];
+            var artwork = artworks[i];
          <div  class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img class="d-block w-100" style="height:auto" src="@house.ImageUrl" alt="@house.Title">
+                        <img class="d-block w-100" style="height:auto" src="@artwork.ImageUrl" alt="@artwork.Title">
            
                    <div class="carousel-caption d-none d-md-block">
-                               <h5 > <a class="btn btn-primary mb-3" style="background-color:#3ba6b1; border-radius: 20px" asp-controller="ArtWork" asp-action="Details" asp-route-id="@house.Id"> @house.Title</a> </h5>
+                                   <h5 > <a class="btn btn-primary mb-3" style="background-color:#3ba6b1; border-radius: 20px" asp-controller="ArtWork" asp-action="Details" asp-route-id="@artwork.Id"> @artwork.Title</a> </h5>
                    </div>
          </div>
         }

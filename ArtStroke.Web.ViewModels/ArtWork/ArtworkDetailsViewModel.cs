@@ -23,7 +23,7 @@ namespace ArtStroke.Web.ViewModels.ArtWork
 
 
         [Display(Name = "Year on creating of artwork")]
-        public string CreatingYear { get; set; } = null!; 
+        public string CreatingYear { get; set; } = null!;
 
         public ArtistInfoOnArtworkViewModel Artist { get; set; } = null!;
     }

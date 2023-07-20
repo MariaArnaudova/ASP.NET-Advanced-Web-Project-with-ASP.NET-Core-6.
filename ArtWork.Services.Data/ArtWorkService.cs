@@ -16,6 +16,7 @@ namespace ArtStroke.Services.Data
     public class ArtWorkService : IArtWorkService
     {
         private readonly ArtStrokeDbContext dbContext;
+
         public ArtWorkService(ArtStrokeDbContext dbContext)
         {
             this.dbContext = dbContext;
@@ -127,9 +128,30 @@ namespace ArtStroke.Services.Data
 
         }
 
-        public Task<string> CreateDesignArtworkAsync(string artistId, ArtWorkFormModel model)
+        public async Task<string> CreateDesignArtworkAsync(string artistId, string artworkId, ArtWorkBecomePrintDesignFormModel model)
         {
-            throw new NotImplementedException();
+            ArtWork artwork = await this.dbContext
+              .ArtWorks
+              .Where(a => a.IsActive)
+              .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            artwork.IsDesignedInPrint = true;
+
+            PrintDesign print = new PrintDesign()
+            {
+                Title = model.Title,
+                Height = model.Height,
+                Width = model.Width,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                CreatorName = model.CreatorName,
+                IsActive = true,
+                UserId = Guid.Parse(artistId),
+                ArtWorkId = Guid.Parse(artworkId),
+            };
+            await this.dbContext.PrintDesigns.AddAsync(print);
+            await this.dbContext.SaveChangesAsync();
+            return print.Id.ToString();
         }
 
         public async Task DeleteArtworkByIdAsync(string artworkId)
@@ -139,7 +161,7 @@ namespace ArtStroke.Services.Data
                 .Where(a => a.IsActive)
                 .FirstAsync(a => a.Id.ToString() == artworkId);
 
-            artwork.IsActive= false;
+            artwork.IsActive = false;
             await this.dbContext.SaveChangesAsync();
         }
 
@@ -159,7 +181,7 @@ namespace ArtStroke.Services.Data
                 Width = artWork.Width,
                 Style = artWork.Style.Name,
                 ImageUrl = artWork.ImageUrl,
-                IsDesignedInPrint = true,
+                IsDesignedInPrint = artWork.IsDesignedInPrint,
                 Title = artWork.Title,
                 Technique = artWork.Technique,
                 CreatingYear = artWork.CreatingYear.Year.ToString(),
@@ -253,6 +275,15 @@ namespace ArtStroke.Services.Data
                 .FirstAsync(a => a.Id.ToString() == artworkId);
 
             return artWork.ArtistId.ToString() == artistId;
+        }
+
+        public async Task<bool> IsMadeOnPrintDesign(string artworkId)
+        {
+            ArtWork artwork = await this.dbContext
+                .ArtWorks
+                .FirstAsync(a => a.Id.ToString() == artworkId);
+
+            return artwork.IsDesignedInPrint;
         }
 
         public async Task<IEnumerable<IndexViewModel>> LastThreeArtWorksAsync()
