@@ -1,0 +1,26 @@
+﻿@model AllPrintDesignsByArtworkIdViewModel
+
+<div class="col-md-4">
+<p ><h4 class="text-xl-center" style="color:#253d37; font-family:Garamond;" > Original Art: @Model.ArtWork.Title</h4></p>
+        <div class="card mb-3 shadow-lg">
+                <img class="card-img-top" src="@Model.ImageUrl" alt="Print Image">
+                <div class="card-body text-center">
+                        <h4 class="shadow-sm rounded-pill">@Model.Title</h4>
+                        <br />
+                        <a asp-controller="PrintDesign" asp-action="Details" asp-route-id="@Model.Id" style="border-radius: 20px"
+                        class="btn btn-success">Details</a>
+
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+                @if(@Model.IsCreatedByCurrentUser == true)
+                {                    
+                    <a asp-controller="PrintDesign" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
+                           class="btn btn-warning">Edit</a>
+                    <a asp-controller="PrintDesign" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
+                          class="btn btn-danger">Delete</a>
+                    <p></p>
+                }
+            }
+                </div>
+        </div>
+</div>

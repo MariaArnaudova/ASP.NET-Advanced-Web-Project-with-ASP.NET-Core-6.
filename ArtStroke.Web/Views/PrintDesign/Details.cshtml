@@ -1,0 +1,26 @@
+﻿@model PrintDesignDetailsViewModel
+
+@{
+    ViewBag.Title = "Print Design Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="card mb-10 position-relative m-auto shadow-lg" style="max-width: 80%; flex-direction:row; align-items:center">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <img src=" @Model.ImageUrl" class="card-img w-100 h-auto " alt="Details Print Design">
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h4 class="card-title mb-5" style="color:#253d37; font-family:Garamond; font-size: 2rem;">@Model.Title</h4>
+        <p class="card-text mb-3">Width in Cm: <b>@Model.Width</b></p>
+        <p class="card-text mb-3">Height in Cm: <b>@Model.Height</b></p>
+        <p class="card-text mb-3">Creator Name(Designer): <b>@Model.CreatorName</b></p>
+        <p class="card-text mb-3">Description: <b>@Model.Description</b></p>
+        <p class="card-text mb-3"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>

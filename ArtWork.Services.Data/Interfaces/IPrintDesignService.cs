@@ -1,15 +1,15 @@
-﻿using ArtStroke.Web.ViewModels.ArtWork;
-using ArtStroke.Web.ViewModels.PrintDesigns;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ArtStroke.Services.Data.Interfaces
 {
+    using ArtStroke.Web.ViewModels.PrintDesigns;
     public interface IPrintDesignService
     {
-        Task<IEnumerable<AllPrintDesignsViewModel>> AllArtworksPrintsByUserIdAsync();
+        Task<IEnumerable<AllPrintDesignsByArtworkIdViewModel>> AllArtworksPrintsByUserIdAndArtworkIdAsync(string artworkId, string userId);
+        Task<PrintDesignDetailsViewModel> GetPrintById(string printId);
+        Task<bool> ExistPrintByIdAsync(string printId);
+        Task<int> GetPrintsCollectionByidCount(string printId);
+        Task<IEnumerable<AllPrintsByUserIdModel>> GetPrintsByUserId(string userId);
+        Task<bool> IsCratedPrintByUserIdAsync(string artworkId, string userId);
+
     }
 }

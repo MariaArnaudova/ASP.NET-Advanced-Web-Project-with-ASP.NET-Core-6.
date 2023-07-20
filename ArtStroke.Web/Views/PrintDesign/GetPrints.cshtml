@@ -1,0 +1,25 @@
+﻿
+@model List<AllPrintDesignsByArtworkIdViewModel>
+@{
+    ViewData["Title"] = "All Prints By Details Artwork";
+}
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <hr />
+
+@if (!Model.Any())
+{
+     <h2 class="text-center">Gallery doesn't contain any print designs!</h2>
+}
+else
+{
+    <h4 class="text-center mb-3 text-decoration-underline">Count of exposed prints on this artwork: <span>@Model.Count()</span></h4>    
+}
+      <div class="row">
+       
+           @foreach (AllPrintDesignsByArtworkIdViewModel print in Model)
+           {
+                       
+              <partial name="_PrintDesignPartial" model="print"/>
+           }
+      </div>
+}
