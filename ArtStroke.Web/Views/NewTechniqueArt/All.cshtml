@@ -1,0 +1,22 @@
+﻿
+@model List<AllTechniquesViewModel>
+@{
+    ViewData["Title"] = "All Techniques";
+}
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <hr />
+
+@if (!Model.Any())
+{
+       <h2 class="text-center">Gallery doesn't contain any techiques designs!</h2>
+}
+else
+{
+        <h5 class="text-center mb-3 text-decoration-underline">Count of exposed techiques: <span>@Model.Count() concepts</span></h5>    
+}
+  <div class="row">
+    @foreach (AllTechniquesViewModel technique in Model)
+    {
+            <partial name="_TechiquePartial" model="technique"/>
+    }
+</div>

@@ -4,12 +4,12 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using System;
-    public class NewTechniqueArtEntityConfiguration : IEntityTypeConfiguration<NewTechiqueArt>
+    public class NewTechniqueArtEntityConfiguration : IEntityTypeConfiguration<NewTechniqueArt>
     {
-        public void Configure(EntityTypeBuilder<NewTechiqueArt> builder)
+        public void Configure(EntityTypeBuilder<NewTechniqueArt> builder)
         {
             builder.HasOne(nt => nt.User)
-                 .WithMany(u => u.NewTechiqueArts)
+                 .WithMany(u => u.TechniqueArts)
                  .HasForeignKey(nt => nt.UserId)
                  .OnDelete(DeleteBehavior.Restrict);
         }

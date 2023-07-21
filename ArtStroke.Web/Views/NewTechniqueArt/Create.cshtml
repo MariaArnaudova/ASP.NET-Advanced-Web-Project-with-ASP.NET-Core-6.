@@ -1,0 +1,14 @@
+﻿@model TechniqueArtsFormModel
+@{
+    ViewBag.Title = "Add New Techique To Art Creating";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<h4 class="mt-4" style="font-family:Garamond; text-align:center; font-weight:bold">If You are inspired create your idea now!</h4>
+<hr/>
+
+<partial name="_NewTechiqueFormPartial" model="@Model"/>
+
+@section Scripts {
+        <partial name ="_ValidationScriptsPartial"/>
+}

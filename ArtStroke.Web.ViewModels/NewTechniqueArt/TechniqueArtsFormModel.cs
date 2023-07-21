@@ -1,19 +1,17 @@
 ﻿
-namespace ArtStroke.Data.Models
+namespace ArtStroke.Web.ViewModels.NewTechniqueArt
 {
     using System.ComponentModel.DataAnnotations;
-    using static Common.EntityValidationConstants.NewTechiqueArt;
-    public class NewTechiqueArt
+    using static Common.EntityValidationConstants.NewTechniqueArt;
+    public class TechniqueArtsFormModel
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required]
-        [MaxLength(TitleMaxLengt)]
+        [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
         public string Title { get; set; } = null!;
 
         [Required]
-        [MaxLength(DescriptionMaxLength)]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         public string Description { get; set; } = null!;
 
 
@@ -23,8 +21,5 @@ namespace ArtStroke.Data.Models
 
         [Required]
         public Guid UserId { get; set; }
-        public virtual ApplicationUser User { get; set; } = null!;
-
-
     }
 }
