@@ -115,7 +115,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArtEvents");
+                    b.ToTable("ArtEvents", (string)null);
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.Artist", b =>
@@ -146,7 +146,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artists", (string)null);
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.ArtWork", b =>
@@ -204,7 +204,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("ArtWorks");
+                    b.ToTable("ArtWorks", (string)null);
 
                     b.HasData(
                         new
@@ -299,7 +299,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("NewTechiqueArts");
+                    b.ToTable("NewTechiqueArts", (string)null);
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.PrintDesign", b =>
@@ -352,7 +352,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PrintDesigns");
+                    b.ToTable("PrintDesigns", (string)null);
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.Style", b =>
@@ -370,7 +370,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Styles");
+                    b.ToTable("Styles", (string)null);
 
                     b.HasData(
                         new

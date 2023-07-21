@@ -20,7 +20,7 @@ namespace ArtStroke.Data
         public DbSet<Style> Styles { get; set; } = null!;
         public DbSet<ArtEvent> ArtEvents { get; set; } = null!;
         public DbSet<PrintDesign> PrintDesigns { get; set; } = null!;
-        public DbSet<NewTechiqueArt> NewTechiqueArts { get; set; } = null!;
+        public DbSet<NewTechniqueArt> NewTechiqueArts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -39,7 +39,7 @@ namespace ArtStroke.Data.Models
 
         public bool IsActive { get; set; }  
     
-        public Guid? ArtWorkId { get; set; } 
+        public Guid? ArtWorkId { get; set; }
 
         [ForeignKey("ArtWorkId")]
         public ArtWork? ArtWork { get; set; }

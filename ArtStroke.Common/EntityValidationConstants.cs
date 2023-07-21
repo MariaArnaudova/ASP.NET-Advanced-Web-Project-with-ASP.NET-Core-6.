@@ -69,10 +69,10 @@ namespace ArtStroke.Common
 
         }
 
-        public static class NewTechiqueArt
+        public static class NewTechniqueArt
         {
-            public const int TitleMinLengt = 2;
-            public const int TitleMaxLengt = 30;
+            public const int TitleMinLength = 2;
+            public const int TitleMaxLength = 30;
 
             public const int DescriptionMinLength = 30;
             public const int DescriptionMaxLength = 3000;

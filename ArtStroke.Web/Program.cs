@@ -39,6 +39,11 @@ namespace ArtStroke.Web
             })
                 .AddEntityFrameworkStores<ArtStrokeDbContext>();
 
+            //builder.Services.AddScoped<INewTechniqueArtService, NewTechniqueArtService>();
+            //builder.Services.AddScoped<IArtWorkService, ArtWorkService>();
+            //builder.Services.AddScoped<IArtistService, ArtistService>();
+            //builder.Services.AddScoped<IStyleService, StyleService>();
+            //builder.Services.AddScoped<IPrintDesignService, PrintDesignService>();
             builder.Services.AddApplicationServices(typeof(IArtWorkService));
 
             builder.Services.AddControllersWithViews();

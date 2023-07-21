@@ -24,7 +24,6 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetPrints(string id)
         {
             List<AllPrintDesignsByArtworkIdViewModel> allPrints = new List<AllPrintDesignsByArtworkIdViewModel>() { };
@@ -51,7 +50,6 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
             bool printExist = await this.printDesignService
@@ -79,7 +77,6 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> MinePrints()
         {
             List<AllPrintsByUserIdModel> myPrints = new List<AllPrintsByUserIdModel>();

@@ -3,12 +3,11 @@ namespace ArtStroke.Web.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using static Common.NotificationMessagesConstants;
     using ArtStroke.Services.Data.Interfaces;
     using ArtStroke.Web.Infrastructure.Extentions;
     using ArtStroke.Web.ViewModels.ArtWork;
     using ArtStroke.Services.Data.Models.ArtWork;
-    using static ArtStroke.Common.EntityValidationConstants;
+    using static Common.NotificationMessagesConstants;
 
     [Authorize]
     public class ArtWorkController : Controller
@@ -64,7 +63,7 @@ namespace ArtStroke.Web.Controllers
             {
                 this.TempData[ErrorMessage] = "Unexpected error";
 
-                return this.RedirectToAction("Index", "ArtWork");
+                return this.RedirectToAction("Index", "Home");
             }
         }
 
@@ -179,7 +178,7 @@ namespace ArtStroke.Web.Controllers
 
             if (!isUserArtist)
             {
-                this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
+                this.TempData[ErrorMessage] = " You are not the creator on the art";
                 return this.RedirectToAction("Become", "Artist");
             }
 
@@ -233,7 +232,7 @@ namespace ArtStroke.Web.Controllers
 
             if (!isUserArtist)
             {
-                this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
+                this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Become", "Artist");
             }
 
@@ -243,7 +242,7 @@ namespace ArtStroke.Web.Controllers
 
             if (!isArtistCreator)
             {
-                this.TempData[ErrorMessage] = "If you want to edit artwork,must be creator on it";
+                this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Mine", "House");
             }
 
@@ -282,7 +281,7 @@ namespace ArtStroke.Web.Controllers
 
             if (!isUserArtist)
             {
-                this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
+                this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Become", "Artist");
             }
 
@@ -292,7 +291,7 @@ namespace ArtStroke.Web.Controllers
 
             if (!isArtistCreator)
             {
-                this.TempData[ErrorMessage] = "If you want to edit artwork,must be creator on it";
+                this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Mine", "House");
             }
 

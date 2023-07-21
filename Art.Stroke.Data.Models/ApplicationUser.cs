@@ -8,11 +8,11 @@ namespace ArtStroke.Data.Models
         {
             this.Id = Guid.NewGuid();   
             this.PrintDesigns = new HashSet<PrintDesign>();
-            this.NewTechiqueArts = new HashSet<NewTechiqueArt>();
+            this.TechniqueArts = new HashSet<NewTechniqueArt>();
         }
 
         public ICollection<PrintDesign> PrintDesigns { get; set; }
 
-        public ICollection<NewTechiqueArt> NewTechiqueArts { get; set; }
+        public ICollection<NewTechniqueArt> TechniqueArts { get; set; }
     }
 }

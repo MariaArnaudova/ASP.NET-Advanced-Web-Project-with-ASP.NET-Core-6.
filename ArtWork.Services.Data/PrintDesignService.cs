@@ -54,8 +54,29 @@ namespace ArtStroke.Services.Data
                      IsCreatedByCurrentUser = p.UserId.ToString() == userId,
                  }).ToArrayAsync();
 
+
+
             return allPrintsByArtworkId;
         }
+
+        //public async Task<PrintDesignDetailsViewModel> GetPrintById(string printId)
+        //{
+        //    PrintDesign print = await this.dbContext
+        //         .PrintDesigns
+        //         .Where(p => p.IsActive)
+        //         .FirstAsync(p => p.Id.ToString() == printId);
+
+        //    return new PrintDesignDetailsViewModel()
+        //    {
+        //        Title = print.Title,
+        //        CreatorName = print.CreatorName,
+        //        Height = print.Height,
+        //        Width = print.Width,
+        //        ImageUrl = print.ImageUrl,
+        //        Description = print.Description,
+        //        ArtWorkId = print.ArtWorkId?.ToString(),
+        //    };
+        //}
 
         public async Task<PrintDesignDetailsViewModel> GetPrintById(string printId)
         {
@@ -72,7 +93,7 @@ namespace ArtStroke.Services.Data
                 Width = print.Width,
                 ImageUrl = print.ImageUrl,
                 Description = print.Description,
-                ArtWorkId = print.ArtWorkId?.ToString(),
+                ArtWorkId = print.ArtWorkId.ToString(),
             };
         }
 
@@ -119,6 +140,8 @@ namespace ArtStroke.Services.Data
 
             return printsByUserId;
         }
+
+
 
         public async Task<bool> IsCratedPrintByUserIdAsync(string printId, string userId)
         {

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<IndexViewModel>
+﻿@using ArtStroke.Data.Models;
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IndexViewModel>
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Home Page";
     var artworks = Model.ToList();
@@ -15,7 +18,7 @@
         <p class="lead">
             @if (User.Identity?.IsAuthenticated ?? false)
             {
-               <a asp-controller="ArtWork" asp-action="Add" class="btn btn-primary btn-lg"role="button">Add Artwork</a>
+                <a asp-controller="ArtWork" asp-action="Add" class="btn btn-primary btn-lg"role="button">Add Artwork</a>
             }
         </p>
   </div>
