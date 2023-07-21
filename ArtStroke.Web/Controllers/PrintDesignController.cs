@@ -6,6 +6,7 @@
     using ArtStroke.Web.ViewModels.PrintDesigns;
     using ArtStroke.Web.Infrastructure.Extentions;
     using static Common.NotificationMessagesConstants;
+    using ArtStroke.Data.Models;
 
     [Authorize]
     public class PrintDesignController : Controller
@@ -55,8 +56,10 @@
             bool printExist = await this.printDesignService
                    .ExistPrintByIdAsync(id);
 
+            PrintDesignDetailsViewModel currentPrint = await this.printDesignService.GetPrintById(id);
+          
             bool artWorkBecomeToPrintExist = await this.artWorkService
-                .IsMadeOnPrintDesign(id);
+                .IsMadeOnPrintDesign(currentPrint.ArtWorkId);
 
             if (!printExist || !artWorkBecomeToPrintExist)
             {
