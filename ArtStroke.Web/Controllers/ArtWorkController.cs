@@ -143,7 +143,8 @@ namespace ArtStroke.Web.Controllers
             if (!artworkExist)
             {
                 this.TempData[ErrorMessage] = "Artwork with this id does not exist";
-                return this.RedirectToAction("All", "ArtWork");
+                //return this.RedirectToAction("All", "ArtWork");
+                return this.NotFound();
             }
 
             try
@@ -189,7 +190,7 @@ namespace ArtStroke.Web.Controllers
             if (!isArtistCreator)
             {
                 this.TempData[ErrorMessage] = "If you want to edit artwork,must be creator on it";
-                return this.RedirectToAction("Mine", "House");
+                return this.RedirectToAction("Mine", "ArtWork");
             }
 
             try
@@ -204,7 +205,7 @@ namespace ArtStroke.Web.Controllers
             {
                 this.TempData[ErrorMessage] = "Unexpected error";
 
-                return this.RedirectToAction("Index", "ArtWork");
+                return this.RedirectToAction("Index", "Home");
             }
         }
 
@@ -243,7 +244,7 @@ namespace ArtStroke.Web.Controllers
             if (!isArtistCreator)
             {
                 this.TempData[ErrorMessage] = "You are not the creator on the art";
-                return this.RedirectToAction("Mine", "House");
+                return this.RedirectToAction("Mine", "ArtWork");
             }
 
             try
@@ -292,7 +293,7 @@ namespace ArtStroke.Web.Controllers
             if (!isArtistCreator)
             {
                 this.TempData[ErrorMessage] = "You are not the creator on the art";
-                return this.RedirectToAction("Mine", "House");
+                return this.RedirectToAction("Mine", "ArtWork");
             }
 
             try
@@ -306,7 +307,7 @@ namespace ArtStroke.Web.Controllers
             {
                 this.TempData[ErrorMessage] = "Unexpected error";
 
-                return this.RedirectToAction("Index", "ArtWork");
+                return this.RedirectToAction("Index", "Home");
             }
         }
 
@@ -386,7 +387,7 @@ namespace ArtStroke.Web.Controllers
             {
                 this.TempData[ErrorMessage] = "Unexpected error";
 
-                return this.RedirectToAction("Index", "ArtWork");
+                return this.RedirectToAction("Index", "Home");
             }
         }
 

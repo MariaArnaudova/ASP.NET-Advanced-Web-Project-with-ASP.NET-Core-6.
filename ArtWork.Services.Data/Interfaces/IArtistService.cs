@@ -7,6 +7,7 @@ namespace ArtStroke.Services.Data.Interfaces
     {
         Task<bool> HasArtistByUserIdAsync(string userId);
 
+        Task<bool> HasArtworkByIdAsync(string artworkId , string userId);
         Task<bool> ArtistExistByPhonenumberAsync(string phonenumber);
 
         Task Create(string userId, BecomeArtistFormModel model);

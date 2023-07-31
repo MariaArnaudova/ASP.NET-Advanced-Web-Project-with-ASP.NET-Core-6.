@@ -7,8 +7,13 @@ namespace ArtStroke.Data.Models
     using static Common.EntityValidationConstants.PrintDesign;
     public class PrintDesign
     {
-        [Key]
-        public int Id { get; set; }
+        public PrintDesign()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
+        //public int Id { get; set; }
 
         [Required]
         [MaxLength(TitleMaxLengt)]

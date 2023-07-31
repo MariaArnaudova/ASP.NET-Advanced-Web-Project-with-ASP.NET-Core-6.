@@ -1,4 +1,12 @@
-﻿@model ArtworkAllViewModel
+﻿@using ArtStroke.Services.Data.Interfaces;
+@using ArtStroke.Web.Infrastructure.Extentions;
+@model ArtworkAllViewModel
+
+@inject IArtistService ArtistService
+@{
+    bool isArtistCreatorOfTheArtwork = await ArtistService.HasArtworkByIdAsync(Model.Id, this.User.GetId());
+    bool isUserArtist = await ArtistService.HasArtistByUserIdAsync(this.User.GetId());
+}
 
 <div class="col-md-4">
         <div class="card mb-3 shadow-lg">
@@ -23,11 +31,14 @@
                            }
                            @if (this.User.Identity?.IsAuthenticated ?? false)
                            {
-                              <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
-                                 class="btn btn-warning">Edit</a>
-                              <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
-                                          class="btn btn-danger">Delete</a>
-                                <p></p>
+                                 @if(isArtistCreatorOfTheArtwork && isUserArtist)
+                                 {
+                                    <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                        class="btn btn-warning">Edit</a>
+                                    <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                        class="btn btn-danger">Delete</a>
+                                    <p></p>
+                                 }   
                            }
                 </div>
         </div>

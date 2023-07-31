@@ -62,5 +62,21 @@ namespace ArtStroke.Services.Data
 
             return result;
         }
+
+        public async Task<bool> HasArtworkByIdAsync(string artworkId, string userId)
+        {
+            Artist? artist = await this.dbContext
+                 .Artists
+                 .Include(a => a.CreatedWorks)
+                 .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
+
+            if(artist == null)
+            {
+                return false;
+            }
+
+            artworkId = artworkId.ToLower();
+            return artist.CreatedWorks.Any(a => a.Id.ToString() == artworkId);
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace ArtStroke.Services.Data
 {
-    using ArtStroke.Web.ViewModels.PrintDesigns;
+    using ArtStroke.Web.ViewModels.PrintDesign;
     using ArtStroke.Data;
     using Microsoft.EntityFrameworkCore;
     using ArtStroke.Services.Data.Interfaces;
@@ -9,6 +9,7 @@ namespace ArtStroke.Services.Data
     using System.Collections.Generic;
     using ArtStroke.Web.ViewModels.ArtWork;
     using System.Security.Cryptography.X509Certificates;
+    using System.Globalization;
 
     public class PrintDesignService : IPrintDesignService
     {
@@ -46,6 +47,7 @@ namespace ArtStroke.Services.Data
                      Title = p.Title,
                      UserId = p.UserId,
                      ArtWorkId = p.ArtWorkId.GetValueOrDefault(),
+                     ////ArtWorkId = p.ArtWorkId,
                      CreatorName = p.CreatorName,
                      Height = p.Height,
                      Width = p.Width,
@@ -64,7 +66,8 @@ namespace ArtStroke.Services.Data
             PrintDesign print = await this.dbContext
                  .PrintDesigns
                  .Where(p => p.IsActive)
-                 .FirstAsync(p => p.Id.ToString() == printId);
+               .FirstAsync(p => p.Id.ToString() == printId);
+
 
             return new PrintDesignDetailsViewModel()
             {
@@ -75,39 +78,23 @@ namespace ArtStroke.Services.Data
                 ImageUrl = print.ImageUrl,
                 Description = print.Description,
                 ArtWorkId = print.ArtWorkId?.ToString(),
+                //ArtWorkId = print.ArtWorkId.ToString(),
             };
         }
 
-        //public async Task<PrintDesignDetailsViewModel> GetPrintById(string printId)
-        //{
-        //    PrintDesign print = await this.dbContext
-        //         .PrintDesigns
-        //         .Where(p => p.IsActive)
-        //         .FirstAsync(p => p.Id.ToString() == printId);
 
-        //    return new PrintDesignDetailsViewModel()
-        //    {
-        //        Title = print.Title,
-        //        CreatorName = print.CreatorName,
-        //        Height = print.Height,
-        //        Width = print.Width,
-        //        ImageUrl = print.ImageUrl,
-        //        Description = print.Description,
-        //        ArtWorkId = print.ArtWorkId.ToString(),
-        //    };
-        //}
-
-        public async Task<bool> ExistPrintByIdAsync(string printId)
+        public async Task<bool> ExistPrintByIdAsync(string printId )
         {
             bool result = await this.dbContext
                 .PrintDesigns
                 .Where(p => p.IsActive)
-                .AnyAsync(p => p.Id.ToString() == printId);
+               .AnyAsync(p => p.Id.ToString() == printId);
+
 
             return result;
         }
 
-        public async Task<int> GetPrintsCollectionByidCount(string printId)
+        public async Task<int> GetPrintsCollectionByidCount(  string printId)
         {
             IEnumerable<PrintDesign> printsCount = await this.dbContext
                 .PrintDesigns
@@ -134,6 +121,7 @@ namespace ArtStroke.Services.Data
                     Width = p.Width,
                     Id = p.Id.ToString(),
                     ArtWorkId = p.ArtWorkId.GetValueOrDefault(),
+                    //ArtWorkId = p.ArtWorkId,
                     UserId = p.UserId
                 })
                 .ToArrayAsync();
@@ -143,14 +131,126 @@ namespace ArtStroke.Services.Data
 
 
 
-        public async Task<bool> IsCratedPrintByUserIdAsync(string printId, string userId)
+        public async Task<bool> IsCratedPrintByUserIdAsync( string printId, string userId)
         {
             PrintDesign print = await this.dbContext
                 .PrintDesigns
                 .FirstAsync(p => p.Id.ToString() == printId);
 
+
             return print.UserId.ToString() == userId;
 
+        }
+
+        public async Task<bool> ExistByIdAsync(string printId)
+        {
+            bool result = await this.dbContext
+                .PrintDesigns
+                .Where(a => a.IsActive)
+                .AnyAsync(a => a.Id.ToString() == printId);
+
+            return result;
+        }
+
+        public async Task<bool> IsUserCreatorOfPrint(string printId, string userId)
+        {
+            PrintDesign print = await this.dbContext
+                .PrintDesigns
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == printId);
+
+
+            return print.UserId.ToString() == userId;
+        }
+
+        public async Task<PrintCreateFormModel> GetPrintForEditByIdAsync( string printId)
+        {
+            PrintDesign print = await this.dbContext
+               .PrintDesigns
+               .Where(a => a.IsActive)
+               .FirstAsync(a => a.Id.ToString() == printId);
+
+
+            return new PrintCreateFormModel
+            {
+                Id = print.Id,
+                Title = print.Title,
+                Width = print.Width,
+                Height = print.Height,
+                CreatorName = print.CreatorName,
+                Description = print.Description,
+                ImageUrl = print.ImageUrl,
+                IsActive = print.IsActive,
+                UserId = print.UserId,
+                ArtWorkId = print.ArtWorkId,
+            };
+        }
+
+        public async Task EditPrintBtIdInFormModelAsync(string printId, PrintCreateFormModel model)
+        {
+            PrintDesign print = await this.dbContext
+                .PrintDesigns
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == printId);
+
+
+            print.Title = model.Title;
+            print.Width = model.Width;
+            print.Height = model.Height;
+            print.ImageUrl = model.ImageUrl;
+            print.IsActive = model.IsActive;
+            print.UserId = model.UserId;
+            print.ArtWorkId = model.ArtWorkId;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<PrintDeleteViewModel> GetPrintDeleteBtIdInAsync(string printId)
+        {
+
+            PrintDesign print = await this.dbContext
+            .PrintDesigns
+            .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == printId);
+
+            return new PrintDeleteViewModel
+            {
+                Id = printId,
+                Title = print.Title,
+                ImageUrl = print.ImageUrl,
+                Creator = print.CreatorName,
+            };
+        }
+
+        public async Task DeletePrintDesignByIdAsync(string printId)
+        {
+            PrintDesign print = await this.dbContext
+                  .PrintDesigns
+                  .Where(a => a.IsActive)
+                  .FirstAsync(a => a.Id.ToString() == printId);
+
+            ArtWork artwork = await this.dbContext
+                .ArtWorks
+                .Where(a => a.IsActive)
+                .FirstAsync(a => a.Id.ToString() == print.ArtWorkId.ToString());
+
+            artwork.IsDesignedInPrint = false;
+
+            //if (this.dbContext
+            //    .ArtWorks.Count() == 0)
+            //{
+
+            //    var artworks = await this.dbContext
+            //        .ArtWorks
+            //        .Where(a => a.IsActive)
+            //        .Select(a => a.IsDesignedInPrint == false)
+            //        .ToArrayAsync();
+
+            //    await this.dbContext.SaveChangesAsync();
+            //}
+            print.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

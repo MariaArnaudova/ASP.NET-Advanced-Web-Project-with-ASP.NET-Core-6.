@@ -3,10 +3,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
     using ArtStroke.Services.Data.Interfaces;
-    using ArtStroke.Web.ViewModels.PrintDesigns;
+    using ArtStroke.Web.ViewModels.PrintDesign;
     using ArtStroke.Web.Infrastructure.Extentions;
     using static Common.NotificationMessagesConstants;
     using ArtStroke.Data.Models;
+    using ArtStroke.Web.ViewModels.ArtWork;
 
     [Authorize]
     public class PrintDesignController : Controller
@@ -98,5 +99,176 @@
             }
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool printExist = await this.printDesignService
+                .ExistByIdAsync(id);
+
+            if (!printExist)
+            {
+                this.TempData[ErrorMessage] = "Print with this id does not exist";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            bool isUserArtist = await this.artistService
+                .HasArtistByUserIdAsync(this.User.GetId());
+
+            if (!isUserArtist)
+            {
+                this.TempData[ErrorMessage] = " You are not the creator on the print";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            string userId =  this.User.GetId()!;
+            bool isUserCreator = await this.printDesignService
+                .IsUserCreatorOfPrint(id, userId);
+
+            if (!isUserCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            try
+            {
+                PrintCreateFormModel formModel = await this.printDesignService
+                         .GetPrintForEditByIdAsync(id);
+
+                return this.View(formModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, PrintCreateFormModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            bool printExist = await this.printDesignService
+              .ExistByIdAsync(id);
+
+            if (!printExist)
+            {
+                this.TempData[ErrorMessage] = "Print with this id does not exist";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            //bool isUserArtist = await this.artistService
+            //    .HasArtistByUserIdAsync(this.User.GetId());
+
+            //if (!isUserArtist)
+            //{
+            //    this.TempData[ErrorMessage] = " You are not the creator on the print";
+            //    return this.RedirectToAction("All", "PrintDesign");
+            //}
+
+            string userId = this.User.GetId()!;
+            bool isUserCreator = await this.printDesignService
+                .IsUserCreatorOfPrint(id, userId);
+
+            if (!isUserCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            try
+            {
+                await this.printDesignService.EditPrintBtIdInFormModelAsync(id, model);
+            }
+            catch (Exception ex)
+            {
+
+                this.ModelState.AddModelError(string.Empty, "Unexpected error");
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Details", "PrintDesign", new { id });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool printExist = await this.printDesignService
+                    .ExistByIdAsync(id);
+
+            if (!printExist)
+            {
+                this.TempData[ErrorMessage] = "Print with this id does not exist";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            string userId = this.User.GetId()!;
+            bool isUserCreator = await this.printDesignService
+                .IsUserCreatorOfPrint(id, userId);
+
+            if (!isUserCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to delete print, must be creator on it";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            try
+            {
+                PrintDeleteViewModel viewModel =
+                     await this.printDesignService.GetPrintDeleteBtIdInAsync(id);
+
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, PrintDeleteViewModel model)
+        {
+            bool printExist = await this.printDesignService
+                  .ExistByIdAsync(id);
+
+            if (!printExist)
+            {
+                this.TempData[ErrorMessage] = "Print with this id does not exist";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            string userId = this.User.GetId()!;
+            bool isUserCreator = await this.printDesignService
+                .IsUserCreatorOfPrint(id, userId);
+
+            if (!isUserCreator)
+            {
+                this.TempData[ErrorMessage] = "If you want to delete print, must be creator on it";
+                return this.RedirectToAction("All", "PrintDesign");
+            }
+
+            try
+            {
+                await this.printDesignService.GetPrintDeleteBtIdInAsync(id);
+                this.TempData[WarningMessage] = $"The print {model.Title} was successfully deleted.";
+                return this.RedirectToAction("MinePrints", "PrintDesigns");
+            }
+            catch (Exception ex)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error";
+
+                return this.RedirectToAction("Index", "ArtWork");
+            }
+        }
     }
 }

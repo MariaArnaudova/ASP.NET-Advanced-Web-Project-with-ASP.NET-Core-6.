@@ -10,6 +10,7 @@ namespace ArtStroke.Web
     using ArtStroke.Services.Data.Interfaces;
     using ArtStroke.Services.Data;
     using ArtStroke.Web.Infrastructure.Extentions;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Program
     {
@@ -46,7 +47,10 @@ namespace ArtStroke.Web
             //builder.Services.AddScoped<IPrintDesignService, PrintDesignService>();
             builder.Services.AddApplicationServices(typeof(IArtWorkService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>());
 
             WebApplication app = builder.Build();
 

@@ -26,12 +26,12 @@ namespace ArtStroke.Web.ViewModels.ArtWork
 
 
         [Required]
-        [Range(MinWidth, int.MaxValue)]
+        [Range(MinWidth, MaxWidth)]
         [Display(Name = "Width in Cm")]
         public int Width { get; set; }
 
         [Required]
-        [Range(MinHeight, int.MaxValue)]
+        [Range(MinHeight, MaxHeight)]
         [Display(Name = "Height in Cm")]
         public int Height { get; set; }
 

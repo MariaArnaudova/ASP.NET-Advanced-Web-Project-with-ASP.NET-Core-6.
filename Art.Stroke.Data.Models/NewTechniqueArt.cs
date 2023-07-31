@@ -5,8 +5,14 @@ namespace ArtStroke.Data.Models
     using static Common.EntityValidationConstants.NewTechniqueArt;
     public class NewTechniqueArt
     {
+        public NewTechniqueArt()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+
 
         [Required]
         [MaxLength(TitleMaxLength)]

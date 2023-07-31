@@ -1,5 +1,13 @@
-﻿
-@using static ArtStroke.Common.GeneralApplicationConstants;
+﻿@using static ArtStroke.Common.GeneralApplicationConstants;
+@using ArtStroke.Services.Data.Interfaces;
+@using ArtStroke.Web.Infrastructure.Extentions;
+
+
+@inject IArtistService ArtistService
+
+@{
+    bool isUserArtist = await ArtistService.HasArtistByUserIdAsync(this.User.GetId());
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +47,13 @@
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
                                 <li class="nav-item ">
+                                
+                                @if(isUserArtist){
                                       <a class="nav-link text-dark" asp-area="" asp-controller="ArtWork" asp-action="Mine">My Artworks</a>  
-                                          <a class="nav-link text-dark" asp-area="" asp-controller="ArtWork" asp-action="Add">Add Artworks</a>
+                                    
+                                      <a class="nav-link text-dark" asp-area="" asp-controller="ArtWork" asp-action="Add">Add Artworks</a>
+                                } 
+
                                 </li> 
                                     <li class="nav-item">
                                       <a class="nav-link text-dark" asp-area="" asp-controller="PrintDesign" asp-action="MinePrints">My Prints Designs</a>

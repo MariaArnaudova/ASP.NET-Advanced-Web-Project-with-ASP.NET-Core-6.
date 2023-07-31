@@ -5,10 +5,15 @@ namespace ArtStroke.Data.Models
     using static Common.EntityValidationConstants.ArtEvent;
     public class ArtEvent
     {
-        [Key]
-        public int Id { get; set; }
+        public ArtEvent()
+        {
+            this.Id = Guid.NewGuid();
+        }
 
-        [Required]  
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required]
         public string Title { get; set; } = null!;
 
         [Required]

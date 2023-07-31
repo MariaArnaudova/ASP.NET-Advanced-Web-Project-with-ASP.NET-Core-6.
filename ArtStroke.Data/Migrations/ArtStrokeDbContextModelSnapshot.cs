@@ -90,11 +90,9 @@ namespace ArtStroke.Data.Migrations
 
             modelBuilder.Entity("ArtStroke.Data.Models.ArtEvent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -115,7 +113,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArtEvents", (string)null);
+                    b.ToTable("ArtEvents");
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.Artist", b =>
@@ -146,7 +144,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Artists", (string)null);
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.ArtWork", b =>
@@ -204,12 +202,12 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("ArtWorks", (string)null);
+                    b.ToTable("ArtWorks");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("82162468-f9e1-461d-8a3a-aea6298ed3ce"),
+                            Id = new Guid("9e681d34-d085-4414-811f-5f571598131f"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -224,7 +222,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1e54204d-e281-4bc1-97d1-87b37e5ba83d"),
+                            Id = new Guid("da8f0a6b-144e-46a2-b694-1d6162b345a8"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -239,22 +237,22 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4fd64dbc-1f76-47ec-b4e4-743bdb87e248"),
+                            Id = new Guid("7d9bfaf4-a5ea-4d63-8022-0aeb8b542a22"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Height = 350,
+                            Height = 35,
                             ImageUrl = "https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/sea-sunset-maria-arnaudova.jpg",
                             IsActive = false,
                             IsDesignedInPrint = false,
                             StyleId = 3,
                             Technique = "Oil on canvas",
                             Title = "Sunset over the sea",
-                            Width = 500
+                            Width = 50
                         },
                         new
                         {
-                            Id = new Guid("6807e797-0e08-4924-b459-ac4247e3b39b"),
+                            Id = new Guid("f0e803dc-0f6f-442e-a2bb-0a66345be6fe"),
                             ArtistId = new Guid("9acb423b-f83d-4a6f-a4e3-d28271e0e828"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -269,13 +267,11 @@ namespace ArtStroke.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ArtStroke.Data.Models.NewTechiqueArt", b =>
+            modelBuilder.Entity("ArtStroke.Data.Models.NewTechniqueArt", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -286,6 +282,9 @@ namespace ArtStroke.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -299,16 +298,14 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("NewTechiqueArts", (string)null);
+                    b.ToTable("NewTechiqueArts");
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.PrintDesign", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ArtWorkId")
                         .HasColumnType("uniqueidentifier");
@@ -352,7 +349,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PrintDesigns", (string)null);
+                    b.ToTable("PrintDesigns");
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.Style", b =>
@@ -370,7 +367,7 @@ namespace ArtStroke.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Styles", (string)null);
+                    b.ToTable("Styles");
 
                     b.HasData(
                         new
@@ -560,10 +557,10 @@ namespace ArtStroke.Data.Migrations
                     b.Navigation("Style");
                 });
 
-            modelBuilder.Entity("ArtStroke.Data.Models.NewTechiqueArt", b =>
+            modelBuilder.Entity("ArtStroke.Data.Models.NewTechniqueArt", b =>
                 {
                     b.HasOne("ArtStroke.Data.Models.ApplicationUser", "User")
-                        .WithMany("NewTechiqueArts")
+                        .WithMany("TechniqueArts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -642,9 +639,9 @@ namespace ArtStroke.Data.Migrations
 
             modelBuilder.Entity("ArtStroke.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("NewTechiqueArts");
-
                     b.Navigation("PrintDesigns");
+
+                    b.Navigation("TechniqueArts");
                 });
 
             modelBuilder.Entity("ArtStroke.Data.Models.Artist", b =>

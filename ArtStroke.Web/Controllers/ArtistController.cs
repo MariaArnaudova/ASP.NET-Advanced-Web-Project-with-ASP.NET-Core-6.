@@ -34,7 +34,7 @@ namespace ArtStroke.Web.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            return View();
+            return this.View();
         }
 
 
@@ -74,7 +74,7 @@ namespace ArtStroke.Web.Controllers
                 this.TempData[ErrorMessage] = "Unexpected error in registering to become an artist";
                 return this.RedirectToAction("Index", "Home");
             }
-            return this.RedirectToAction("All", "House");
+            return this.RedirectToAction("All", "ArtWork");
         }
     }
 }
