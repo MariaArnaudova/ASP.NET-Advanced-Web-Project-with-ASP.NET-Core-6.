@@ -1,0 +1,28 @@
+﻿@model PrintDeleteViewModel
+
+@{
+    ViewBag.Title = "Delete Print Design";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<form asp-action="Delete">
+    <div class="row">
+         <div class="col-md-6 d-flex justify-content-center">
+                 <img class="card-img-top" style="width: 80%" src="@Model.ImageUrl" alt="Print Design Image">
+         </div>
+         <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" disabled="disabled" />
+                </div>
+                 <div class="form-group">
+                    <label asp-for="Creator" class="control-label"></label>
+                    <input asp-for="Creator" class="form-control" disabled="disabled" />
+                <div class="form-group mt-3  d-flex justify-content-center">
+                    <input type="submit" value="Delete" class="btn btn-primary col-md-3" style="background-color:#3ba6b1; border-radius: 20px"/>
+                </div>
+         </div>
+         </div>
+    </div>
+</form>
