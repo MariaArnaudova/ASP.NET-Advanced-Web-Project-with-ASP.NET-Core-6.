@@ -26,6 +26,7 @@ namespace ArtStroke.Services.Data
             ArtWork atrworkById = await this.dbContext
                 .ArtWorks
                 .Include(a => a.Style)
+                .Where(a => a.IsActive)
                 .FirstAsync(a => a.Id.ToString() == artworkId);
 
             ArtworkAllViewModel artworkModel = new ArtworkAllViewModel()
@@ -45,8 +46,9 @@ namespace ArtStroke.Services.Data
                  {
                      Id = p.Id.ToString(),
                      Title = p.Title,
-                     UserId = p.UserId,
-                     ArtWorkId = p.ArtWorkId.GetValueOrDefault(),
+                     UserId = p.UserId.ToString(),
+                     ArtWorkId = p.ArtWorkId.ToString(),
+                     //ArtWorkId = p.ArtWorkId.GetValueOrDefault(),
                      ////ArtWorkId = p.ArtWorkId,
                      CreatorName = p.CreatorName,
                      Height = p.Height,
@@ -55,8 +57,6 @@ namespace ArtStroke.Services.Data
                      ArtWork = artworkModel,
                      IsCreatedByCurrentUser = p.UserId.ToString() == userId,
                  }).ToArrayAsync();
-
-
 
             return allPrintsByArtworkId;
         }
@@ -71,19 +71,20 @@ namespace ArtStroke.Services.Data
 
             return new PrintDesignDetailsViewModel()
             {
+                Id = print.Id.ToString(),
                 Title = print.Title,
                 CreatorName = print.CreatorName,
                 Height = print.Height,
                 Width = print.Width,
                 ImageUrl = print.ImageUrl,
-                Description = print.Description,
+                Description = print.Description,               
                 ArtWorkId = print.ArtWorkId?.ToString(),
                 //ArtWorkId = print.ArtWorkId.ToString(),
             };
         }
 
 
-        public async Task<bool> ExistPrintByIdAsync(string printId )
+        public async Task<bool> ExistPrintByIdAsync(string printId)
         {
             bool result = await this.dbContext
                 .PrintDesigns
@@ -94,7 +95,7 @@ namespace ArtStroke.Services.Data
             return result;
         }
 
-        public async Task<int> GetPrintsCollectionByidCount(  string printId)
+        public async Task<int> GetPrintsCollectionByidCount(string printId)
         {
             IEnumerable<PrintDesign> printsCount = await this.dbContext
                 .PrintDesigns
@@ -129,9 +130,7 @@ namespace ArtStroke.Services.Data
             return printsByUserId;
         }
 
-
-
-        public async Task<bool> IsCratedPrintByUserIdAsync( string printId, string userId)
+        public async Task<bool> IsCratedPrintByUserIdAsync(string printId, string userId)
         {
             PrintDesign print = await this.dbContext
                 .PrintDesigns
@@ -163,17 +162,19 @@ namespace ArtStroke.Services.Data
             return print.UserId.ToString() == userId;
         }
 
-        public async Task<PrintCreateFormModel> GetPrintForEditByIdAsync( string printId)
+        public async Task<PrintCreateFormModel> GetPrintForEditByIdAsync(string printId)
         {
             PrintDesign print = await this.dbContext
                .PrintDesigns
                .Where(a => a.IsActive)
+               .Include(a => a.ArtWork)
+               .Include(a => a.User)
                .FirstAsync(a => a.Id.ToString() == printId);
 
 
             return new PrintCreateFormModel
             {
-                Id = print.Id,
+                Id = print.Id.ToString(),
                 Title = print.Title,
                 Width = print.Width,
                 Height = print.Height,
@@ -181,8 +182,8 @@ namespace ArtStroke.Services.Data
                 Description = print.Description,
                 ImageUrl = print.ImageUrl,
                 IsActive = print.IsActive,
-                UserId = print.UserId,
-                ArtWorkId = print.ArtWorkId,
+                UserId = print.User.Id.ToString(),
+                ArtWorkId = print.ArtWork.Id.ToString(),
             };
         }
 
@@ -198,10 +199,12 @@ namespace ArtStroke.Services.Data
             print.Width = model.Width;
             print.Height = model.Height;
             print.ImageUrl = model.ImageUrl;
-            print.IsActive = model.IsActive;
-            print.UserId = model.UserId;
-            print.ArtWorkId = model.ArtWorkId;
-
+            print.IsActive = true;
+            print.Description = model.Description;
+            print.ArtWorkId = Guid.Parse(model.ArtWorkId);
+            print.UserId = Guid.Parse(model.UserId);
+            print.CreatorName = model.CreatorName;  
+            
             await this.dbContext.SaveChangesAsync();
         }
 

@@ -41,12 +41,12 @@
             try
             {
                 allPrints.AddRange(await this.printDesignService.AllArtworksPrintsByUserIdAndArtworkIdAsync(id, userId));
-                return View(allPrints);
+                return this.View(allPrints);
             }
             catch (Exception)
             {
                 return RedirectToAction("All", "ArtWork");
-                throw;
+              
             }
 
         }
@@ -54,19 +54,20 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            bool printExist = await this.printDesignService
-                   .ExistPrintByIdAsync(id);
-
+            //bool printExist = await this.printDesignService
+            //       .ExistPrintByIdAsync(id);
+         
             PrintDesignDetailsViewModel currentPrint = await this.printDesignService.GetPrintById(id);
-          
+
             bool artWorkBecomeToPrintExist = await this.artWorkService
                 .IsMadeOnPrintDesign(currentPrint.ArtWorkId);
 
-            if (!printExist || !artWorkBecomeToPrintExist)
+            if (/*!printExist  ||*/  !artWorkBecomeToPrintExist)
             {
                 this.TempData[ErrorMessage] = "Print with this id does not exist";
                 return this.RedirectToAction("GetPrints", "PrintDesign");
             }
+
 
             try
             {
@@ -109,32 +110,25 @@
             if (!printExist)
             {
                 this.TempData[ErrorMessage] = "Print with this id does not exist";
-                return this.RedirectToAction("All", "PrintDesign");
+                return this.RedirectToAction("MinePrints", "PrintDesign");
             }
 
-            bool isUserArtist = await this.artistService
-                .HasArtistByUserIdAsync(this.User.GetId());
-
-            if (!isUserArtist)
-            {
-                this.TempData[ErrorMessage] = " You are not the creator on the print";
-                return this.RedirectToAction("All", "PrintDesign");
-            }
-
-            string userId =  this.User.GetId()!;
+            string userId = this.User.GetId()!;
             bool isUserCreator = await this.printDesignService
                 .IsUserCreatorOfPrint(id, userId);
 
             if (!isUserCreator)
             {
                 this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
-                return this.RedirectToAction("All", "PrintDesign");
+                return this.RedirectToAction("MinePrints", "PrintDesign");
             }
+           
 
             try
             {
                 PrintCreateFormModel formModel = await this.printDesignService
                          .GetPrintForEditByIdAsync(id);
+                //formModel.UserId = userId;
 
                 return this.View(formModel);
             }
@@ -147,12 +141,12 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, PrintCreateFormModel model)
+        public async Task<IActionResult> Edit(string id, PrintCreateFormModel formModel)
         {
 
             if (!ModelState.IsValid)
             {
-                return this.View(model);
+                return this.View(formModel);
             }
 
             bool printExist = await this.printDesignService
@@ -161,17 +155,8 @@
             if (!printExist)
             {
                 this.TempData[ErrorMessage] = "Print with this id does not exist";
-                return this.RedirectToAction("All", "PrintDesign");
+                return this.RedirectToAction("MinePrints", "PrintDesign");
             }
-
-            //bool isUserArtist = await this.artistService
-            //    .HasArtistByUserIdAsync(this.User.GetId());
-
-            //if (!isUserArtist)
-            //{
-            //    this.TempData[ErrorMessage] = " You are not the creator on the print";
-            //    return this.RedirectToAction("All", "PrintDesign");
-            //}
 
             string userId = this.User.GetId()!;
             bool isUserCreator = await this.printDesignService
@@ -180,18 +165,18 @@
             if (!isUserCreator)
             {
                 this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
-                return this.RedirectToAction("All", "PrintDesign");
+                return this.RedirectToAction("MinePrints", "PrintDesign");
             }
 
             try
             {
-                await this.printDesignService.EditPrintBtIdInFormModelAsync(id, model);
+                await this.printDesignService.EditPrintBtIdInFormModelAsync(id, formModel);
             }
             catch (Exception ex)
             {
 
                 this.ModelState.AddModelError(string.Empty, "Unexpected error");
-                return this.View(model);
+                return this.View(formModel);
             }
 
             return this.RedirectToAction("Details", "PrintDesign", new { id });
@@ -259,9 +244,9 @@
 
             try
             {
-                await this.printDesignService.GetPrintDeleteBtIdInAsync(id);
+                await this.printDesignService.DeletePrintDesignByIdAsync(id);
                 this.TempData[WarningMessage] = $"The print {model.Title} was successfully deleted.";
-                return this.RedirectToAction("MinePrints", "PrintDesigns");
+                return this.RedirectToAction("MinePrints", "PrintDesign");
             }
             catch (Exception ex)
             {

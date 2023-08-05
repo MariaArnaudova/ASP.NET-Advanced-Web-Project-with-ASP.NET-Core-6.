@@ -18,8 +18,8 @@ namespace ArtStroke.Web.ViewModels.PrintDesign
         public string CreatorName { get; set; } = null!;
 
         public bool IsCreatedByCurrentUser { get; set; }
-        public Guid? UserId { get; set; }
-        public Guid ArtWorkId { get; set; }
+        public string UserId { get; set; } = null!;
+        public string ArtWorkId { get; set; } = null!;
         public ArtworkAllViewModel ArtWork { get; set; } = null!;
     }
 }

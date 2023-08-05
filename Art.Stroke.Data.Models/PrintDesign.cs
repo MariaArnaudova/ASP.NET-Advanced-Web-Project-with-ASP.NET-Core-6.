@@ -13,7 +13,6 @@ namespace ArtStroke.Data.Models
         }
 
         public Guid Id { get; set; }
-        //public int Id { get; set; }
 
         [Required]
         [MaxLength(TitleMaxLengt)]

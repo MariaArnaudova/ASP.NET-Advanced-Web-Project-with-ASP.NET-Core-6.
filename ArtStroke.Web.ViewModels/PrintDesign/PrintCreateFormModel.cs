@@ -8,8 +8,7 @@ namespace ArtStroke.Web.ViewModels.PrintDesign
     using static Common.EntityValidationConstants.PrintDesign;
     public class PrintCreateFormModel
     {
-        //public int Id { get; set; }
-        public Guid Id { get; set; }
+        public string Id { get; set; } = null!;
 
         [Required]
         [StringLength(TitleMaxLengt, MinimumLength = TitleMinLengt)]
@@ -34,10 +33,11 @@ namespace ArtStroke.Web.ViewModels.PrintDesign
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        public Guid? UserId { get; set; }
+        public string UserId { get; set; } = null!;
 
         public bool IsActive { get; set; }
 
-        public Guid? ArtWorkId { get; set; }
+        [Required]
+        public string ArtWorkId { get; set; } = null!;
     }
 }
