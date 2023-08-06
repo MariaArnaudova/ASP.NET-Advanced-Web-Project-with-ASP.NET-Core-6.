@@ -1,0 +1,25 @@
+﻿@model List<AllArtEventByIdViewModel>
+@{
+    ViewData["Title"] = "All Art Events";
+}
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <hr />>
+
+
+@if (!Model.Any())
+{
+         <h2 class="text-center">Still doesn't public any events!</h2>
+}
+else
+{
+        <h4 class="text-center mb-3 text-decoration-underline">Count of exposed events: <span>@Model.Count()</span></h4>    
+}
+
+  <div class="row">
+
+    @foreach (AllArtEventByIdViewModel artEvent in Model)
+    {
+
+         <partial name="_ArtEventsPartial" model="artEvent"/>
+    }
+  </div>
