@@ -46,7 +46,7 @@
 
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
-                                <li class="nav-item ">
+                                    <li class="nav-item bg-black bg-opacity-10 rounded-3">
                                 
                                 @if(isUserArtist){
                                       <a class="nav-link text-dark" asp-area="" asp-controller="ArtWork" asp-action="Mine">My Artworks</a>  
@@ -55,13 +55,19 @@
                                 } 
 
                                 </li> 
-                                    <li class="nav-item">
+
+                                 <li class="nav-item bg-black bg-opacity-10 rounded-3">
                                       <a class="nav-link text-dark" asp-area="" asp-controller="PrintDesign" asp-action="MinePrints">My Prints Designs</a>
                                 </li>
    
-                                 <li class="nav-item">
+                                <li class="nav-item bg-black bg-opacity-10 rounded-3">
                                                <a class="nav-link text-dark" asp-area="" asp-controller="NewTechniqueArt" asp-action="Create">Create New Technique</a>
                                                <a class="nav-link text-dark" asp-area="" asp-controller="NewTechniqueArt" asp-action="All">Techniques Collection</a>
+                                </li> 
+
+                                <li class="nav-item bg-black bg-opacity-10 rounded-3">
+                                                   <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="Create">Create New Art Event</a>
+                                                       <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="All">All Art Events</a>
                                 </li> 
                         }
                     </ul>
