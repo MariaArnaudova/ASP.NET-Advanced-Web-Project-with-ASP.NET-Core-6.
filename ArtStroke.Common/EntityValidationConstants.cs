@@ -79,7 +79,6 @@ namespace ArtStroke.Common
 
             public const int ImageUrlMaxLengt = 2048;
         }
-
     }
-
+   
 }

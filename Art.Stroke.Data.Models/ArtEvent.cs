@@ -17,6 +17,9 @@ namespace ArtStroke.Data.Models
         public string Title { get; set; } = null!;
 
         [Required]
+        public bool IsActive { get; set; }
+
+        [Required]
         public DateTime PublicDate { get; set; }
 
         [Required]
