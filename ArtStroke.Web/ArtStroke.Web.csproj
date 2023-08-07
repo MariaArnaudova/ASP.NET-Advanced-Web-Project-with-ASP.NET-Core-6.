@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ArtWork.Services.Data\ArtStroke.Services.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\" />
+  </ItemGroup>
+
 </Project>

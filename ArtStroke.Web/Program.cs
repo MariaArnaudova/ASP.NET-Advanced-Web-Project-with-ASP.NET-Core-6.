@@ -47,6 +47,12 @@ namespace ArtStroke.Web
             //builder.Services.AddScoped<IPrintDesignService, PrintDesignService>();
             builder.Services.AddApplicationServices(typeof(IArtWorkService));
 
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/User/Login";
+                cfg.AccessDeniedPath = "/Home/Error/401";
+            });
+
             builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>
