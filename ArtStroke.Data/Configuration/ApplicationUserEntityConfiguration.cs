@@ -8,12 +8,12 @@ namespace ArtStroke.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            //builder.Property(u => u.FirstName)
-            //    .HasDefaultValue("Test");
+            builder.Property(u => u.FirstName)
+                .HasDefaultValue("Test");
 
 
-            //builder.Property(u => u.LastName)
-            //    .HasDefaultValue("TestovUser");
+            builder.Property(u => u.LastName)
+                .HasDefaultValue("TestovUser");
         }
     }
 }

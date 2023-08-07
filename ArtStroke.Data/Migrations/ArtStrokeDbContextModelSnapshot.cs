@@ -42,6 +42,20 @@ namespace ArtStroke.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Test");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("TestovUser");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -210,7 +224,7 @@ namespace ArtStroke.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("605ec1df-b6a8-4b8d-97bf-199b904894f4"),
+                            Id = new Guid("97357f6b-f536-40a1-a3d8-d42ed0d92392"),
                             ArtistId = new Guid("4db15f1b-f1c7-4cda-a6fc-a8f1dc4c4d2b"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -225,7 +239,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a70fe6a7-e9ed-4422-839a-38555cc32596"),
+                            Id = new Guid("ed314586-e35c-42d3-a651-1aa71da6c37e"),
                             ArtistId = new Guid("4db15f1b-f1c7-4cda-a6fc-a8f1dc4c4d2b"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -240,7 +254,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82d6c357-5443-4041-8687-a08e1641fe1a"),
+                            Id = new Guid("d20d810d-faed-495d-9ef6-1da9069e37fa"),
                             ArtistId = new Guid("4db15f1b-f1c7-4cda-a6fc-a8f1dc4c4d2b"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -255,7 +269,7 @@ namespace ArtStroke.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("df50606e-acea-4e2e-a2d1-9af8e5cc5f1e"),
+                            Id = new Guid("89f05774-b5cc-4281-bff3-62baf4a9449f"),
                             ArtistId = new Guid("4db15f1b-f1c7-4cda-a6fc-a8f1dc4c4d2b"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatingYear = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
