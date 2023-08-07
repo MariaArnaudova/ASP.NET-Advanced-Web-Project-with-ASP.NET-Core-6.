@@ -5,10 +5,12 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IUserService UserService
 
 @inject IArtistService ArtistService
 @{
     bool isUserArtis = await this.ArtistService.HasArtistByUserIdAsync(this.User.GetId());
+    string userFullName = await this.UserService.GetFullNameByEmailAsync(User.Identity?.Name!);
 }
 
 
@@ -17,7 +19,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity?.Name!</a>
+                <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @userFullName</a>
         </li>
         @if (!isUserArtis)
         {

@@ -9,6 +9,8 @@ namespace ArtStroke.Web.ViewModels.Artist
 {
     public class ArtistInfoOnArtworkViewModel
     {
+        public string FullName { get; set; } = null!;
+
         [Display(Name="Author name of original")]
         public string Name { get; set; } = null!;
         public string Biography { get; set; } = null!;

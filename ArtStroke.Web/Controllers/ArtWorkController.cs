@@ -15,14 +15,17 @@ namespace ArtStroke.Web.Controllers
         private readonly IStyleService styleService;
         private readonly IArtistService artistService;
         private readonly IArtWorkService artWorkService;
+        private readonly IUserService userService;
 
         public ArtWorkController(IStyleService styleService,
             IArtistService artistService,
-            IArtWorkService artWorkService)
+            IArtWorkService artWorkService,
+            IUserService userService)
         {
             this.styleService = styleService;
             this.artistService = artistService;
             this.artWorkService = artWorkService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -151,6 +154,8 @@ namespace ArtStroke.Web.Controllers
             {
                 ArtworkDetailsViewModel viewModel = await this.artWorkService
                          .DetailsByArtistIdAsync(id);
+                viewModel.Artist.FullName =
+                    await this.userService.GetFullNameByEmailAsync(this.User.Identity?.Name!);
 
                 return View(viewModel); ;
             }
