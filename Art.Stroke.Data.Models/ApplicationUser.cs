@@ -14,13 +14,13 @@ namespace ArtStroke.Data.Models
             this.TechniqueArts = new HashSet<NewTechniqueArt>();
         }
 
-        [Required]
-        [MaxLength(FirstNameMaxLength)]
-        public string FirtsName { get; set; } = null!;
+        //[Required]
+        //[MaxLength(FirstNameMaxLength)]
+        //public string FirstName { get; set; } = null!;
 
-        [Required]
-        [MaxLength(LastNameMaxLength)]
-        public string LastName { get; set; } = null!;
+        //[Required]
+        //[MaxLength(LastNameMaxLength)]
+        //public string LastName { get; set; } = null!;
 
         public ICollection<PrintDesign> PrintDesigns { get; set; }
 

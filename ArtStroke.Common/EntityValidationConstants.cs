@@ -82,6 +82,9 @@ namespace ArtStroke.Common
 
         public static class User
         {
+            public const int PasswordMinLength = 6;
+            public const int PasswordMaxLength = 100;
+
             public const int FirstNameMinLength = 1;
             public const int FirstNameMaxLength = 20;
 
@@ -89,5 +92,5 @@ namespace ArtStroke.Common
             public const int LastNameMaxLength = 20;
         }
     }
-   
+
 }

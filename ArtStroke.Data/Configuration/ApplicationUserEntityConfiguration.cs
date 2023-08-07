@@ -8,7 +8,12 @@ namespace ArtStroke.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            throw new NotImplementedException();
+            //builder.Property(u => u.FirstName)
+            //    .HasDefaultValue("Test");
+
+
+            //builder.Property(u => u.LastName)
+            //    .HasDefaultValue("TestovUser");
         }
     }
 }
