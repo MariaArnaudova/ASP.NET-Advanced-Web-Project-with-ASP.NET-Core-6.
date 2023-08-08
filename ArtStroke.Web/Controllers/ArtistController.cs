@@ -60,7 +60,7 @@ namespace ArtStroke.Web.Controllers
                 this.ModelState.AddModelError(nameof(model.PhoneNumber), "Artist allready exist with the same phonenumber.");
             }
 
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }

@@ -2,6 +2,7 @@
 
 namespace ArtStroke.Web
 {
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -10,8 +11,8 @@ namespace ArtStroke.Web
     using ArtStroke.Services.Data.Interfaces;
     using ArtStroke.Services.Data;
     using ArtStroke.Web.Infrastructure.Extentions;
-    using Microsoft.AspNetCore.Mvc;
 
+    using static Common.GeneralApplicationConstants;
     public class Program
     {
         public static void Main(string[] args)
@@ -38,6 +39,7 @@ namespace ArtStroke.Web
                 options.Password.RequiredLength =
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ArtStrokeDbContext>();
 
             //builder.Services.AddScoped<INewTechniqueArtService, NewTechniqueArtService>();
@@ -81,6 +83,8 @@ namespace ArtStroke.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(AdminEmail);
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();

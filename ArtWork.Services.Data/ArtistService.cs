@@ -31,6 +31,7 @@ namespace ArtStroke.Services.Data
             Artist newArtist = new Artist()
             {
                 Name = model.Name,
+                Biography= model.Biography, 
                 PhoneNumber = model.PhoneNumber,
                 UserId = Guid.Parse(userId),
             };
