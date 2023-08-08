@@ -43,7 +43,7 @@ namespace ArtStroke.Web.Controllers
         {
             string usertId = this.User.GetId()!;
 
-            if (usertId == null)
+            if (usertId == null )
             {
                 this.TempData[ErrorMessage] = "User with this id does not exist";
                 return this.RedirectToAction("All", "ArtEvent");
@@ -65,7 +65,13 @@ namespace ArtStroke.Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create(ArtEventFormModel model)
-        {         
+        {
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = "User has to be an administrator to create events";
+                return this.RedirectToAction("All", "ArtEvent");
+            }
+
 
             if (!this.ModelState.IsValid)
             {

@@ -1,7 +1,17 @@
-﻿@model ArtworkDetailsViewModel
+﻿@using ArtStroke.Services.Data.Interfaces;
+@using ArtStroke.Web.Infrastructure.Extentions;
+
+@inject IArtistService ArtistService
+@{
+    bool isArtistCreatorOfTheArtwork = await ArtistService.HasArtworkByIdAsync(Model.Id, this.User.GetId());
+    bool isUserArtist = await ArtistService.HasArtistByUserIdAsync(this.User.GetId());
+}
+
+@model ArtworkDetailsViewModel
 @{
     ViewBag.Title = "Artwork Details";
 }
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 <div class="container " style="display:inline">
@@ -23,8 +33,11 @@
              <div class="row form-inline justify-content-sm-between">
                     @if (this.User.Identity?.IsAuthenticated ?? false)
                     {
-                              <a class="btn btn-warning col-2 shadow-lg" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                              <a class="ml-2 btn btn-danger col-2 shadow-lg" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        @if (isArtistCreatorOfTheArtwork || this.User.IsAdmin())
+                        {                      
+                            <a class="btn btn-warning col-2 shadow-lg" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                            <a class="ml-2 btn btn-danger col-2 shadow-lg" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        }
 
                        @*   <form class="ml-2 " asp-controller="ArtWork" asp-action="Design" asp-route-id="@Model.Id" method="post">
                            <input class="btn btn-primary" type="submit" value="Design" />

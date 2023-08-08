@@ -121,7 +121,7 @@ namespace ArtStroke.Web.Controllers
             bool isUserArtist = await this.artistService
                 .HasArtistByUserIdAsync(userId);
 
-            if (isUserArtist)
+            if (isUserArtist || this.User.IsAdmin())
             {
                 string? artistId =
                     await this.artistService.GetArtistIdByUserIdAsync(userId);
@@ -182,7 +182,7 @@ namespace ArtStroke.Web.Controllers
             bool isUserArtist = await this.artistService
                 .HasArtistByUserIdAsync(this.User.GetId());
 
-            if (!isUserArtist)
+            if (!isUserArtist && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = " You are not the creator on the art";
                 return this.RedirectToAction("Become", "Artist");
@@ -192,7 +192,7 @@ namespace ArtStroke.Web.Controllers
             bool isArtistCreator = await this.artWorkService
                 .IsArtistCreatorOfArtwork(id, artistId);
 
-            if (!isArtistCreator)
+            if (!isArtistCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to edit artwork,must be creator on it";
                 return this.RedirectToAction("Mine", "ArtWork");
@@ -246,7 +246,7 @@ namespace ArtStroke.Web.Controllers
             bool isArtistCreator = await this.artWorkService
                 .IsArtistCreatorOfArtwork(id, artistId);
 
-            if (!isArtistCreator)
+            if (!isArtistCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Mine", "ArtWork");
@@ -285,7 +285,7 @@ namespace ArtStroke.Web.Controllers
             bool isUserArtist = await this.artistService
                 .HasArtistByUserIdAsync(this.User.GetId());
 
-            if (!isUserArtist)
+            if (!isUserArtist && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Become", "Artist");
@@ -295,7 +295,7 @@ namespace ArtStroke.Web.Controllers
             bool isArtistCreator = await this.artWorkService
                 .IsArtistCreatorOfArtwork(id, artistId);
 
-            if (!isArtistCreator)
+            if (!isArtistCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You are not the creator on the art";
                 return this.RedirectToAction("Mine", "ArtWork");
@@ -331,7 +331,7 @@ namespace ArtStroke.Web.Controllers
             bool isUserArtist = await this.artistService
                 .HasArtistByUserIdAsync(this.User.GetId());
 
-            if (!isUserArtist)
+            if (!isUserArtist && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to edit artwork,must become an artist";
                 return this.RedirectToAction("Become", "Artist");
@@ -341,7 +341,7 @@ namespace ArtStroke.Web.Controllers
             bool isArtistCreator = await this.artWorkService
                 .IsArtistCreatorOfArtwork(id, artistId);
 
-            if (!isArtistCreator)
+            if (!isArtistCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to edit artwork, must be creator on it";
                 return this.RedirectToAction("Mine", "House");

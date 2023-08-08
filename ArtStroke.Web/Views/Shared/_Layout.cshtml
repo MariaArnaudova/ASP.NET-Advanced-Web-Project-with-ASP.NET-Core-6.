@@ -66,8 +66,13 @@
                                 </li> 
 
                                     <li class="nav-item bg-black bg-opacity-10 rounded-3 ms-lg-2">
-                                                   <a class="nav-link text-dark mb-3" asp-area="" asp-controller="ArtEvent" asp-action="Create">Create New Art Event</a>
-                                                       <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="All">All Art Events</a>
+
+                                @if (this.User.IsAdmin())
+                                {                            
+                                       <a class="nav-link text-dark mb-3" asp-area="" asp-controller="ArtEvent" asp-action="Create">Create New Art Event</a>
+                                }
+
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="ArtEvent" asp-action="All">All Art Events</a>
                                 </li> 
                         }
                     </ul>

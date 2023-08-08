@@ -84,7 +84,10 @@ namespace ArtStroke.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.SeedAdministrator(AdminEmail);
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(AdminEmail);
+            }
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
