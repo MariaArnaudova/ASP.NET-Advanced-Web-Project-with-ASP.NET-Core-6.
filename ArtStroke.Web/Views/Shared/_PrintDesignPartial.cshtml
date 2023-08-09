@@ -1,4 +1,13 @@
-﻿@model AllPrintDesignsByArtworkIdViewModel
+﻿@using ArtStroke.Services.Data.Interfaces;
+@using ArtStroke.Web.Infrastructure.Extentions;
+
+@inject IPrintDesignService PrintDesignService
+
+@model AllPrintDesignsByArtworkIdViewModel
+
+@{
+    bool isUserCreatorOfPrint = await PrintDesignService.IsUserCreatorOfPrint(Model.Id, this.User.GetId());
+}
 
 <div class="col-md-4">
 <p ><h4 class="text-xl-center" style="color:#253d37; font-family:Garamond;" > Original Art: @Model.ArtWork.Title</h4></p>
@@ -13,12 +22,16 @@
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
                 @if(@Model.IsCreatedByCurrentUser == true)
-                {                    
+                {              
+                    
+                    @if (isUserCreatorOfPrint || this.User.IsAdmin())
+                    {
                     <a asp-controller="PrintDesign" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
                            class="btn btn-warning">Edit</a>
                     <a asp-controller="PrintDesign" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
                           class="btn btn-danger">Delete</a>
                     <p></p>
+                    }
                 }
             }
                 </div>

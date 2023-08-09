@@ -117,7 +117,7 @@
             bool isUserCreator = await this.printDesignService
                 .IsUserCreatorOfPrint(id, userId);
 
-            if (!isUserCreator)
+            if (!isUserCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
                 return this.RedirectToAction("MinePrints", "PrintDesign");
@@ -162,7 +162,7 @@
             bool isUserCreator = await this.printDesignService
                 .IsUserCreatorOfPrint(id, userId);
 
-            if (!isUserCreator)
+            if (!isUserCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to edit print,must be creator on it";
                 return this.RedirectToAction("MinePrints", "PrintDesign");
@@ -199,7 +199,7 @@
             bool isUserCreator = await this.printDesignService
                 .IsUserCreatorOfPrint(id, userId);
 
-            if (!isUserCreator)
+            if (!isUserCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to delete print, must be creator on it";
                 return this.RedirectToAction("All", "PrintDesign");
@@ -236,7 +236,7 @@
             bool isUserCreator = await this.printDesignService
                 .IsUserCreatorOfPrint(id, userId);
 
-            if (!isUserCreator)
+            if (!isUserCreator && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "If you want to delete print, must be creator on it";
                 return this.RedirectToAction("All", "PrintDesign");

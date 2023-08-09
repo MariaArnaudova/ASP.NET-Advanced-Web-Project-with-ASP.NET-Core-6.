@@ -13,6 +13,8 @@ namespace ArtStroke.Web
     using ArtStroke.Web.Infrastructure.Extentions;
 
     using static Common.GeneralApplicationConstants;
+    using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -89,7 +91,23 @@ namespace ArtStroke.Web
                 app.SeedAdministrator(AdminEmail);
             }
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                     name: "areas",
+                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
+                endpoints.MapControllerRoute(
+                    name: "ProtectingUrlRoute",
+                    pattern: "/{controller}/{action}/{id}/{information}",
+                    defaults: new { Controller = "Category", Action = "Details" }
+                    );
+
+            });
+
             app.MapDefaultControllerRoute();
+
+
             app.MapRazorPages();
 
             app.Run();

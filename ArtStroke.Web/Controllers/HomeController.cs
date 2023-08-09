@@ -8,6 +8,8 @@ namespace ArtStroke.Web.Controllers
     using ArtStroke.Web.ViewModels.Home;
     using ArtStroke.Services.Data.Interfaces;
 
+    using static Common.GeneralApplicationConstants;
+
     public class HomeController : Controller
     {
         private readonly IArtWorkService artWorkService;
@@ -18,6 +20,11 @@ namespace ArtStroke.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+               return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             IEnumerable<IndexViewModel> viewModels =
              await this.artWorkService.LastThreeArtWorksAsync();
 
