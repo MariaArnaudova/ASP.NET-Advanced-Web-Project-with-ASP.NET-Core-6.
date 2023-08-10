@@ -7,6 +7,8 @@ namespace ArtStroke.Web.Controllers
     using ArtStroke.Web.Infrastructure.Extentions;
     using ArtStroke.Web.ViewModels.ArtWork;
     using ArtStroke.Services.Data.Models.ArtWork;
+
+    using static Common.GeneralApplicationConstants;
     using static Common.NotificationMessagesConstants;
 
     [Authorize]
@@ -115,6 +117,11 @@ namespace ArtStroke.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Mine", "ArtWork", new { Area = AdminAreaName });
+            }
+
             List<ArtworkAllViewModel> myArtworks = new List<ArtworkAllViewModel>();
 
             string userId = this.User.GetId();
@@ -129,8 +136,8 @@ namespace ArtStroke.Web.Controllers
             }
             else
             {
-     
-                return RedirectToAction("All", "ArtWork");               
+
+                return RedirectToAction("All", "ArtWork");
             }
 
             return this.View(myArtworks);
@@ -272,7 +279,7 @@ namespace ArtStroke.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-           
+
             bool artworkExist = await this.artWorkService
                .ExistByIdAsync(id);
 
@@ -363,11 +370,11 @@ namespace ArtStroke.Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Design (string id)
+        public async Task<IActionResult> Design(string id)
         {
             string usertId = this.User.GetId()!;
 
-            if(usertId == null)
+            if (usertId == null)
             {
                 this.TempData[ErrorMessage] = "User with this id does not exist";
                 return this.RedirectToAction("All", "ArtWork");
@@ -385,7 +392,7 @@ namespace ArtStroke.Web.Controllers
             try
             {
                 ArtWorkBecomePrintDesignFormModel formModel = new ArtWorkBecomePrintDesignFormModel();
-                
+
                 return View(formModel);
             }
             catch (Exception)

@@ -1,0 +1,18 @@
+﻿@model MyArtworksViewModel
+@{
+    ViewBag.Title = "My Artworks";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<hr />
+<h4 class="text-center mb-4">My Added Artworks</h4>
+@if (!Model.AddedArtworks.Any())
+{
+    <h2 class="text-center">You have no added artworks yet!</h2>
+}
+<div class="row">
+    @foreach (var house in Model.AddedArtworks)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_ArtWorkPartial.cshtml", house)
+    }
+</div>

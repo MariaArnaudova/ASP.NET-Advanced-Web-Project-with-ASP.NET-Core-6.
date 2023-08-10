@@ -16,7 +16,7 @@
 
                         <h6>(@(Model.IsDesignedInPrint ? "Designed" : "Not Designed"))</h6>
                         <br />
-                        <a asp-controller="ArtWork" asp-action="Details" asp-route-id="@Model.Id" style="border-radius: 20px"
+                        <a asp-area="" asp-controller="ArtWork" asp-action="Details" asp-route-id="@Model.Id" style="border-radius: 20px"
                         class="btn btn-success">Details</a>
                            @if (!Model.IsDesignedInPrint)
                            {
@@ -27,15 +27,15 @@
                            }
                            @if (Model.IsDesignedInPrint == true)
                            {
-                              <a class="ml-2 btn btn-light col-4 shadow-lg rounded-pill" asp-controller="PrintDesign" asp-action="GetPrints" asp-route-id="@Model.Id">Print Design Gallery</a>
+                                  <a class="ml-2 btn btn-light col-4 shadow-lg rounded-pill" asp-area="" asp-controller="PrintDesign" asp-action="GetPrints" asp-route-id="@Model.Id">Print Design Gallery</a>
                            }
                            @if (this.User.Identity?.IsAuthenticated ?? false)
                            {
                                  @if((isArtistCreatorOfTheArtwork && isUserArtist)|| this.User.IsAdmin())
                                  {
-                                    <a asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                            <a asp-area="" asp-controller="ArtWork" asp-action="Edit" asp-route-id="@Model.Id" style="border-radius: 20px"
                                         class="btn btn-warning">Edit</a>
-                                    <a asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
+                                            <a asp-area="" asp-controller="ArtWork" asp-action="Delete" asp-route-id="@Model.Id" style="border-radius: 20px"
                                         class="btn btn-danger">Delete</a>
                                     <p></p>
                                  }   

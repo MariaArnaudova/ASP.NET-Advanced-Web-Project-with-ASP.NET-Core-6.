@@ -1,12 +1,12 @@
 ﻿
 namespace ArtStroke.Services.Data
 {
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     using ArtStroke.Web.ViewModels.PrintDesign;
     using ArtStroke.Data;
-    using Microsoft.EntityFrameworkCore;
     using ArtStroke.Services.Data.Interfaces;
     using ArtStroke.Data.Models;
-    using System.Collections.Generic;
     using ArtStroke.Web.ViewModels.ArtWork;
     using System.Security.Cryptography.X509Certificates;
     using System.Globalization;
@@ -18,6 +18,36 @@ namespace ArtStroke.Services.Data
         public PrintDesignService(ArtStrokeDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<AllPrintDesignsViewModel>> AllAsync()
+        {
+            IEnumerable<AllPrintDesignsViewModel> prints = await this.dbContext
+                  .PrintDesigns
+                  .Include(pd => pd.ArtWork)
+                  .Where(p => p.IsActive)
+                  .Select(pd => new AllPrintDesignsViewModel()
+                  {
+                      Id = pd.Id.ToString(),
+                      Title = pd.Title,
+                      CreatorName = pd.CreatorName,
+                      Height = pd.Height,
+                      Width = pd.Width,
+                      ImageUrl = pd.ImageUrl,
+                      UserId = pd.UserId.ToString(),
+                      ArtWorkId = pd.ArtWorkId.ToString(),
+                      ArtWork = new ArtworkAllViewModel()
+                      {
+                          Id = pd.ArtWork.Id.ToString(),
+                          Title = pd.ArtWork.Title,
+                          ImageUrl = pd.ArtWork.ImageUrl,
+                          IsDesignedInPrint = pd.ArtWork.IsDesignedInPrint,
+                          Style = pd.ArtWork.Style.Name,
+                      }
+                  })
+                  .ToListAsync();
+
+            return prints;
         }
 
         public async Task<IEnumerable<AllPrintDesignsByArtworkIdViewModel>> AllArtworksPrintsByUserIdAndArtworkIdAsync(string artworkId, string userId)
@@ -77,7 +107,7 @@ namespace ArtStroke.Services.Data
                 Height = print.Height,
                 Width = print.Width,
                 ImageUrl = print.ImageUrl,
-                Description = print.Description,               
+                Description = print.Description,
                 ArtWorkId = print.ArtWorkId?.ToString(),
                 //ArtWorkId = print.ArtWorkId.ToString(),
             };
@@ -203,8 +233,8 @@ namespace ArtStroke.Services.Data
             print.Description = model.Description;
             print.ArtWorkId = Guid.Parse(model.ArtWorkId);
             print.UserId = Guid.Parse(model.UserId);
-            print.CreatorName = model.CreatorName;  
-            
+            print.CreatorName = model.CreatorName;
+
             await this.dbContext.SaveChangesAsync();
         }
 
@@ -255,5 +285,7 @@ namespace ArtStroke.Services.Data
 
             await this.dbContext.SaveChangesAsync();
         }
+
+
     }
 }

@@ -4,6 +4,7 @@ namespace ArtStroke.Services.Data.Interfaces
     using ArtStroke.Web.ViewModels.PrintDesign;
     public interface IPrintDesignService
     {
+        Task<IEnumerable<AllPrintDesignsViewModel>> AllAsync();
         Task<IEnumerable<AllPrintDesignsByArtworkIdViewModel>> AllArtworksPrintsByUserIdAndArtworkIdAsync(string artworkId, string userId);
         Task<PrintDesignDetailsViewModel> GetPrintById(string printId);
         Task<bool> ExistPrintByIdAsync(string printId);
