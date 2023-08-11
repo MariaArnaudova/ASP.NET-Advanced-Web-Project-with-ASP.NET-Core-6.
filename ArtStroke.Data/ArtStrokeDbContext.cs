@@ -13,6 +13,10 @@ namespace ArtStroke.Data
         public ArtStrokeDbContext(DbContextOptions<ArtStrokeDbContext> options)
             : base(options)
         {
+            if (!this.Database.IsRelational())
+            {
+                this.Database.EnsureCreated();  
+            }
         }
 
         public DbSet<Artist> Artists { get; set; } = null!;

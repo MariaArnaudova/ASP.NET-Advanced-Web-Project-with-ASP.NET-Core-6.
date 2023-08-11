@@ -17,6 +17,7 @@ namespace ArtStroke.Web.Areas.Admin.Controllers
             this.userService = userService;
         }
 
+        [Route("User/All")]
         public async Task<IActionResult> All()
         {
             IEnumerable<UserViewModel> users = await this.userService.AllAsync();
