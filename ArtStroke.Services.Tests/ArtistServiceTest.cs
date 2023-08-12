@@ -3,7 +3,6 @@ namespace ArtStroke.Services.Tests
 {
     using Microsoft.EntityFrameworkCore;
     using ArtStroke.Data;
-    //using ArtStroke.Data.Models;
     using ArtStroke.Services.Data;
     using ArtStroke.Services.Data.Interfaces;
     using static DatabaseSeeder;
@@ -96,7 +95,7 @@ namespace ArtStroke.Services.Tests
         public async Task ArtistExistByPhonenumberAsyncReturnFalseIfNotExists()
         {
             bool existArtistByPhoneNumber = await this.artistService.ArtistExistByPhonenumberAsync("+3593333333344");
-            Assert.True(existArtistByPhoneNumber);
+            Assert.False(existArtistByPhoneNumber);
         }
     }
 }
