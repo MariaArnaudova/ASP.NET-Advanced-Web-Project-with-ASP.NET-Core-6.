@@ -1,4 +1,5 @@
-﻿@model AllArtEventByIdViewModel
+﻿@using ArtStroke.Web.Infrastructure.Extentions;
+@model AllArtEventByIdViewModel
 
 <div class="card mb-10 position-relative m-auto shadow-lg col-md-8" style="max-width: 80%; flex-direction:row; align-items:center">
   <div class="row no-gutters col-md-12">
@@ -11,10 +12,10 @@
         <p class="card-text mb-3">Title: <b>@Model.Title</b></p>
         <p class="card-text mb-3">Public date: <b>@Model.PublicDate</b></p>
         <p class="card-text mb-3">Information: <b>@Model.Information</b></p>
-                @if (this.User.Identity?.IsAuthenticated ?? false)
+                @if (this.User.IsAdmin())
                 {                   
-                     <a class="btn btn-warning col-4 shadow-lg" asp-controller="ArtEvent" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                     <a class="ml-2 btn btn-danger col-4 shadow-lg" asp-controller="ArtEvent" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                     <a asp-area="Admin" class="btn btn-warning col-4 shadow-lg" asp-controller="ArtEvent" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                         <a asp-area="Admin" class="ml-2 btn btn-danger col-4 shadow-lg" asp-controller="ArtEvent" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                 }
       </div>
     </div>
