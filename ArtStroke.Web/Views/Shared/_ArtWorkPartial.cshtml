@@ -20,7 +20,7 @@
                         class="btn btn-success">Details</a>
                            @if (!Model.IsDesignedInPrint)
                            {
-                                   <form class="input-group-sm mt-md-2 mb-2" asp-controller="ArtWork"
+                                       <form class="input-group-sm mt-md-2 mb-2" asp-area="" asp-controller="ArtWork"
                                    asp-action="Design" asp-route-id="@Model.Id" method="post" >
                                        <input class="btn btn-primary" type="submit" value="Begin to Design" style="border-radius: 20px"/>
                                </form>
